@@ -1,8 +1,10 @@
 # DevOps
 
 ## CI/CD
-- Workflows GitHub Actions backend/frontend.
-- Gates qualite: lint, tests, build.
+- Workflow backend actif: `.github/workflows/ci-backend.yml`.
+- Gates qualite backend: Checkstyle, tests JUnit 5, build Maven.
+- Merge sur `main` bloque si les checks backend requis sont rouges.
+- Workflow frontend a implementer quand le socle frontend existe.
 
 ## Docker
 - Dockerfile backend multi-stage.
@@ -38,5 +40,21 @@
 - `where.exe javac`
 - `where.exe mvn`
 
+### Commandes minimales de verification CI backend
+- `cd backend/backend`
+- `.\mvnw.cmd checkstyle:check`
+- `.\mvnw.cmd test`
+- `.\mvnw.cmd -DskipTests clean package`
+- Attendu: `LINT_OK`, `TEST_OK`, `PACKAGE_OK`
+
+### Branch protection backend
+- `branch-ruleset.json` exige pour `main`:
+	- `CI Backend / Lint (Checkstyle)`
+	- `CI Backend / Unit Tests (JUnit 5)`
+	- `CI Backend / Build (Maven)`
+
 ## Trace Jira
 - Ticket(s): a renseigner.
+
+
+

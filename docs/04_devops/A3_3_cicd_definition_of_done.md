@@ -223,9 +223,9 @@ Ce niveau est suffisant pour un MVP robuste et pose les bases d'une qualite cont
 | Phase | Pourquoi | Quand |
 |-------|---------|-------|
 | **1** | Protéger `main` et forcer PR en attendant CI | NOW (A.3.3 Phase 1) |
-| **2** | Forcer lint/tests/build autom. | B.3.1/B.3.2 (quand projets existent) |
+| **2** | Forcer lint/tests/build autom. | Backend: actif / Frontend: B.3.2 |
 
-Sans Phase 1, tu risques de casser `main` accidentellement. Sans Phase 2, tu acceptes la responsabilité perso d'exécuter lint/tests avant merge.
+Sans Phase 1, tu risques de casser `main` accidentellement. Sans Phase 2, tu acceptes la responsabilité perso d'exécuter lint/tests avant merge. Le backend est maintenant branché sur cette logique via `ci-backend.yml`.
 
 ---
 
@@ -235,6 +235,8 @@ Sans Phase 1, tu risques de casser `main` accidentellement. Sans Phase 2, tu acc
 - ✅ Protection de branche testable localement (commit direct → reject)
 - ✅ Self-review workflow possible (1 approbateur = toi-même)
 - ✅ Threads resolution enforcement en place
+- ✅ CI backend implémentée: lint Checkstyle, tests JUnit 5, build Maven
+- ✅ Checks requis alignés avec `ci-backend.yml`
 
 ---
 
@@ -245,7 +247,7 @@ Sans Phase 1, tu risques de casser `main` accidentellement. Sans Phase 2, tu acc
 2. ✅ Pousser sur cette branche : `git push origin test/protection`
 3. ✅ Créer PR vers `main` via GitHub UI
 4. ✅ Self-approuver la PR
-5. ✅ Vérifier que merge est autorisé (pas de status checks requis, juste approval + threads)
+5. ✅ Vérifier que merge est autorisé si les checks backend sont verts et les threads résolus
 6. ✅ Merger et nettoyer `test/protection`
 
 ---
@@ -254,12 +256,12 @@ Sans Phase 1, tu risques de casser `main` accidentellement. Sans Phase 2, tu acc
 
 | Critère | Phase | Statut |
 |---------|-------|--------|
-| Pipelines backend/frontend automatiques | 2 | ⏳ Déferred (B.3.1/B.3.2) |
-| Gates lint/tests/build | 2 | ⏳ Déferred (B.3.1/B.3.2) |
-| Blocage merge si echec | 2 | ⏳ Déferred (B.3.1/B.3.2) |
-| Reproductibilité locale documentée | 2 | ⏳ Plan en place (GitHub_Infrastructure_Plan.md) |
+| Pipelines backend/frontend automatiques | 2 | ✅ Backend actif / ⏳ Frontend déferred |
+| Gates lint/tests/build | 2 | ✅ Backend actif / ⏳ Frontend déferred |
+| Blocage merge si echec | 2 | ✅ Backend actif via checks requis |
+| Reproductibilité locale documentée | 2 | ✅ Backend documenté / ⏳ Frontend planifié |
 | **Protection branche** | **1** | **✅ Implémenté** |
 | **PR obligatoire** | **1** | **✅ Implémenté** |
 | **Self-review minimum** | **1** | **✅ Implémenté** |
 
-**Conclusion** : A.3.3 Phase 1 est complète. Phase 2 s'étend sur B.3.1/B.3.2.
+**Conclusion** : A.3.3 Phase 1 est complète et la CI backend de la Phase 2 est en place. Le volet frontend reste à implémenter lors de B.3.2.

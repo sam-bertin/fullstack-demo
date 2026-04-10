@@ -182,9 +182,9 @@ Objectif: etre autonome sur les actions quotidiennes (run, debug, tests, build) 
 	- Cle Jira
 	- Outil installe/mis a jour
 	- Commandes executees
-	- Resultat observe
-	- Action suivante
-
+		- `.\mvnw.cmd checkstyle:check`
+		- `.\mvnw.cmd test`
+		- `.\mvnw.cmd -DskipTests clean package`
 Entree courante:
 - Date: 2026-04-10
 - Cle Jira: A.3.3 (setup outillage local pour suite B.1.1)
@@ -222,4 +222,22 @@ Entree courante (validation B.1.1 - outillage + build):
 	- Le test de contexte necessite une datasource de test (H2) pour eviter une dependance PostgreSQL locale.
 - Action suivante:
 	- Poursuivre le cadrage B.1.1/B.1.2 (config profils et base de donnees dev/test).
+
+Entree courante (CI backend activee):
+- Date: 2026-04-10
+- Cle Jira: B.3.1
+- Contexte: workflow backend GitHub Actions ajoute avec gates lint/test/build.
+- Commandes executees:
+	- `.\mvnw.cmd checkstyle:check`
+	- `.\mvnw.cmd test`
+	- `.\mvnw.cmd -DskipTests clean package`
+- Resultat observe:
+	- `LINT_OK`
+	- `TEST_OK`
+	- `PACKAGE_OK`
+- Action suivante:
+	- Garder `branch-ruleset.json` aligne sur ces 3 checks pour bloquer le merge si un gate est rouge.
+
+
+
 
