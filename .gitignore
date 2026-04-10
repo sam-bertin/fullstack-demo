@@ -1,0 +1,53 @@
+# =========================
+# SYSTÈME D'EXPLOITATION
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# IDE (VS Code, etc.)
+# =========================
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.iml
+*.class
+
+# =========================
+# BACKEND (Java / Maven / Spring Boot)
+# =========================
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+# Optionnel : décommenter la ligne ci-dessous si tu ne veux pas versionner le wrapper Maven
+# .mvn/wrapper/maven-wrapper.jar
+
+# =========================
+# FRONTEND (Node / React / Vite)
+# =========================
+node_modules/
+dist/
+dist-ssr/
+*.local
+.eslintcache
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# VARIABLES D'ENVIRONNEMENT & SECRETS
+# =========================
+.env
+.env.*.local
+*.pem
+*.key
