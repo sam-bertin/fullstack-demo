@@ -51,3 +51,8 @@ pnpm-debug.log*
 .env.*.local
 *.pem
 *.key
+
+# =========================
+# AUTRES FICHIERS TEMPORAIRES
+# =========================
+branch-ruleset.json
