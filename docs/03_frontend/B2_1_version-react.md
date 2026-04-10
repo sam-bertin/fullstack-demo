@@ -24,8 +24,7 @@
 - Gestion erreurs 401/403.
 
 ## Tests
-- Vitest actif avec test smoke pour la CI.
-- Strategie a etendre sur composants/hooks critiques.
+- Strategie tests composants/hooks critiques.
 
 ## Trace Jira
 - Ticket(s): B.2.1 initialise (socle React + Vite + TypeScript strict).

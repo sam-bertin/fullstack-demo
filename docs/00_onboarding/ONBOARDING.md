@@ -238,6 +238,41 @@ Entree courante (CI backend activee):
 - Action suivante:
 	- Garder `branch-ruleset.json` aligne sur ces 3 checks pour bloquer le merge si un gate est rouge.
 
+Entree courante (validation B.2.1 - socle frontend):
+- Date: 2026-04-10
+- Cle Jira: B.2.1
+- Contexte: initialisation du projet frontend avec Vite + React + TypeScript.
+- Commandes executees:
+	- `npm create vite@latest frontend -- --template react-ts`
+	- `npm install react@19.2.0 react-dom@19.2.0`
+	- `npm install -D @types/react@19.2.2 @types/react-dom@19.2.2`
+	- `npm run lint`
+	- `npm run build`
+- Resultat observe:
+	- `LINT_OK`
+	- `BUILD_OK`
+	- TypeScript strict active explicitement dans `tsconfig.app.json` et `tsconfig.node.json`.
+	- Evolution de plan validee: stack frontend ciblee en React 19.
+- Action suivante:
+	- Enchainer sur B.2.2 pour installer les dependances coeur frontend (react-router-dom, axios, @tanstack/react-query, zustand, react-hook-form, zod).
+
+Entree courante (validation B.3.2 - CI frontend):
+- Date: 2026-04-10
+- Cle Jira: B.3.2
+- Contexte: ajout d'un workflow GitHub Actions frontend aligne sur le backend avec jobs sequentiels lint/test/build.
+- Commandes executees:
+	- `npm install -D vitest`
+	- `npm run lint`
+	- `npm run test`
+	- `npm run build`
+- Resultat observe:
+	- `LINT_OK`
+	- `TEST_OK` (Vitest: 1 test smoke passe)
+	- `BUILD_OK`
+	- Artefact frontend `dist/` genere.
+- Action suivante:
+	- Enchainer sur B.3.3 pour activer les checks frontend comme required status checks sur `main`.
+
 
 
 
