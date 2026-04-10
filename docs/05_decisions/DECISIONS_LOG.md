@@ -239,6 +239,10 @@ Temps de feedback CI potentiellement plus long, mais reduction forte des regress
 - **Action 3 :** documenter les commandes de reproduction locale des checks.
 
 #### Liens
-- **Jira :** A.3.3
-- **Documentation associee :** docs/04_devops/A3_3_cicd_definition_of_done.md
-- **PR/Commit (si disponible) :** a renseigner lors de l'implementation
+- **Jira** : A.3.3 (Phase 1), B.3.1/B.3.2 (Phase 2)
+- **Documentation associée** : 
+  - `docs/04_devops/A3_3_cicd_definition_of_done.md` (vue générale + phases)
+  - `docs/04_devops/GitHub_Branch_Protection_Setup.md` (Phase 1 - IMPLÉMENTÉ)
+  - `docs/04_devops/GitHub_Infrastructure_Plan.md` (Phase 2 - plan pour B.3.1/B.3.2)
+- **Artefacts Phase 1** : `branch-ruleset.json` (mis à jour)
+- **PR/Commit (si disponible)** : à renseigner lors du push infrastructure
