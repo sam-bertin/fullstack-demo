@@ -1,8 +1,14 @@
 # DevOps
 
 ## CI/CD
-- Workflows GitHub Actions backend/frontend.
-- Gates qualite: lint, tests, build.
+- Workflow backend actif: `.github/workflows/ci-backend.yml`.
+- Gates qualite backend: Checkstyle, tests JUnit 5, build Maven.
+- Merge sur `main` bloque si les checks backend requis sont rouges.
+- Workflow frontend a implementer quand le socle frontend existe.
+- Trigger backend CI: `push` uniquement, avec filtres sur les fichiers backend/workflow.
+- Execution backend CI sur runner natif `ubuntu-latest` avec `./mvnw`.
+- Le wrapper Maven du depot porte la version Maven, `setup-java` ne gere que le JDK 21 et le cache Maven.
+- Cache Maven gere par `actions/setup-java@v4` avec `cache: 'maven'` dans chaque job.
 
 ## Docker
 - Dockerfile backend multi-stage.
@@ -19,5 +25,40 @@
 - Commandes exactes.
 - Resultats attendus.
 
+## Gouvernance outillage (obligatoire)
+- Toute installation ou mise a jour d'outil impactant le build/test doit etre documentee au fil de l'eau.
+- La source de verite pour l'installation locale est `docs/00_onboarding/ONBOARDING.md`.
+- Chaque entree doit inclure:
+	- Date
+	- Cle Jira associee
+	- Outil/version
+	- Chemin binaire (pattern portable, sans chemin personnel complet)
+	- Commandes de verification
+	- Resultat attendu et resultat observe
+
+### Commandes minimales de verification outillage backend
+- `java -version` -> doit retourner Java 21.x
+- `javac -version` -> doit retourner Java 21.x
+- `mvn -v` -> doit retourner Maven 3.9+ et Java 21.x
+- `where.exe java`
+- `where.exe javac`
+- `where.exe mvn`
+
+### Commandes minimales de verification CI backend
+- `cd backend/backend`
+- `.\mvnw.cmd checkstyle:check`
+- `.\mvnw.cmd test`
+- `.\mvnw.cmd -DskipTests clean package`
+- Attendu: `LINT_OK`, `TEST_OK`, `PACKAGE_OK`
+
+### Branch protection backend
+- `branch-ruleset.json` exige pour `main`:
+	- `CI Backend / Lint (Checkstyle)`
+	- `CI Backend / Unit Tests (JUnit 5)`
+	- `CI Backend / Build (Maven)`
+
 ## Trace Jira
 - Ticket(s): a renseigner.
+
+
+
