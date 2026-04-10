@@ -5,9 +5,9 @@
 - Gates qualite backend: Checkstyle, tests JUnit 5, build Maven.
 - Merge sur `main` bloque si les checks backend requis sont rouges.
 - Workflow frontend a implementer quand le socle frontend existe.
-- Execution backend CI containerisee: image `maven:3.9-eclipse-temurin-21`.
 - Trigger backend CI: `push` uniquement, avec filtres sur les fichiers backend/workflow.
-- Les commandes CI utilisent `mvn` dans le conteneur (equivalent local: `./mvnw.cmd ...` sous Windows).
+- Execution backend CI sur runner natif `ubuntu-latest` avec `./mvnw`.
+- Le wrapper Maven du depot porte la version Maven, `setup-java` ne gere que le JDK 21 et le cache Maven.
 - Cache Maven gere par `actions/setup-java@v4` avec `cache: 'maven'` dans chaque job.
 
 ## Docker
