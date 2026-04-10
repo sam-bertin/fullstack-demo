@@ -1,0 +1,6 @@
+Issue Type,Summary,Description,Priority,Labels,Epic Name
+Epic,EPIC A - Gouvernance Architecture et Qualite,"Poser les regles transverses backend/frontend/CI avant les features critiques.",Highest,"mvp,architecture,qualite",Gouvernance Architecture et Qualite
+Epic,EPIC B - Fondations Techniques,"Creer un socle executable localement et verifiable en CI.",Highest,"mvp,foundation",Fondations Techniques
+Epic,EPIC C - MVP Authentification,"Permettre inscription + connexion securisees avec JWT.",High,"mvp,auth",MVP Authentification
+Epic,EPIC D - MVP Chat 1-to-1 Temps Reel,"Permettre envoi et reception instantanes entre deux utilisateurs.",High,"mvp,chat,realtime",MVP Chat 1-to-1 Temps Reel
+Epic,EPIC E - Durcissement MVP et Preparation Iterations,"Fiabiliser le MVP avant extension fonctionnelle.",Medium,"mvp,hardening",Durcissement MVP et Preparation Iterations

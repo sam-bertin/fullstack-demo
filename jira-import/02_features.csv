@@ -1,0 +1,15 @@
+Issue Type,Summary,Description,Priority,Labels,Epic Link
+Story,Fonctionnalite A.1 - Contrat API et gestion des erreurs,"Definir un langage commun pour les reponses API et les erreurs.",Highest,"feature,api,error-handling",FUL-1
+Story,Fonctionnalite A.2 - Contrat DTO et validation,"Definir des regles strictes pour donnees entrantes/sortantes.",Highest,"feature,dto,validation",FUL-1
+Story,Fonctionnalite A.3 - Definition of Done,"Formaliser la qualite minimale avant merge.",High,"feature,dod",FUL-1
+Story,Fonctionnalite B.1 - Initialisation Backend Spring Boot,"Mettre en place le squelette backend conforme standards.",Highest,"feature,backend,spring",FUL-2
+Story,Fonctionnalite B.2 - Initialisation Frontend React,"Mettre en place un socle frontend modulaire par features.",Highest,"feature,frontend,react",FUL-2
+Story,Fonctionnalite B.3 - CI qualite de base,"Mettre des controles automatiques obligatoires a chaque PR.",High,"feature,ci",FUL-2
+Story,Fonctionnalite C.1 - Auth backend JWT,"Construire endpoints et logique metier auth.",High,"feature,auth,backend",FUL-3
+Story,Fonctionnalite C.2 - Auth frontend,"Construire le parcours utilisateur auth cote client.",High,"feature,auth,frontend",FUL-3
+Story,Fonctionnalite D.1 - Chat backend,"Mettre en place WebSocket, securite et persistence.",High,"feature,chat,backend",FUL-4
+Story,Fonctionnalite D.2 - Chat frontend,"Creer UI chat et logique temps reel.",High,"feature,chat,frontend",FUL-4
+Story,Fonctionnalite E.1 - Securite operationnelle,"Finaliser CORS, acces et hygiene secrets.",Medium,"feature,security",FUL-5
+Story,Fonctionnalite E.2 - Observabilite,"Mettre en place logs structures et correlation basique.",Medium,"feature,observability",FUL-5
+Story,Fonctionnalite E.3 - Qualite et tests critiques,"Ajouter tests backend/frontend et validation e2e manuelle.",Medium,"feature,tests,quality",FUL-5
+Story,Fonctionnalite E.4 - Conteneurisation locale,"Standardiser le run local avec Docker/Compose.",Medium,"feature,docker",FUL-5

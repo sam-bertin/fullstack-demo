@@ -1,0 +1,42 @@
+Issue Type,Summary,Description,Priority,Labels,Parent
+Sub-task,Tache A.1.1 - Definir ApiResponse standard,"Unifier format success/message/data/errorCode.",Highest,"task,api",FUL-6
+Sub-task,Tache A.1.2 - Definir cartographie des erreurs,"Mapper exception -> statut HTTP -> code erreur -> message.",High,"task,error-handling",FUL-6
+Sub-task,Tache A.2.1 - Definir conventions DTO Request/Response,"Decoupler API publique et modele persistence.",Highest,"task,dto",FUL-7
+Sub-task,Tache A.2.2 - Definir politique de validation backend/frontend,"Aligner validation @Valid et schemas frontend.",High,"task,validation",FUL-7
+Sub-task,Tache A.3.1 - Definir DoD Backend,"Checklist qualite backend avant merge.",Medium,"task,dod",FUL-8
+Sub-task,Tache A.3.2 - Definir DoD Frontend,"Checklist qualite frontend avant merge.",Medium,"task,dod",FUL-8
+Sub-task,Tache A.3.3 - Definir DoD CI/CD,"Checks obligatoires de merge.",Medium,"task,dod,ci",FUL-8
+Sub-task,Tache B.1.1 - Initialiser projet Spring Boot,"Creer base Java 21 + dependances coeur.",Highest,"task,backend,spring",FUL-9
+Sub-task,Tache B.1.2 - Configurer PostgreSQL et profils,"Configurer dev/test et externaliser secrets.",High,"task,backend,db",FUL-9
+Sub-task,Tache B.1.3 - Mettre en place architecture en couches,"Structurer packages controller/service/repository/dto/config.",High,"task,backend,architecture",FUL-9
+Sub-task,Tache B.2.1 - Initialiser React Vite TS strict,"Configurer frontend strict sans any.",Highest,"task,frontend,react",FUL-10
+Sub-task,Tache B.2.2 - Installer dependances frontend,"Installer router, axios, query, zustand, rhf, zod.",High,"task,frontend,dependencies",FUL-10
+Sub-task,Tache B.2.3 - Structurer frontend par features,"Creer features/auth, features/chat, shared/lib, shared/ui.",High,"task,frontend,architecture",FUL-10
+Sub-task,Tache B.3.1 - Workflow CI backend,"Configurer lint/tests/build backend.",High,"task,ci,backend",FUL-11
+Sub-task,Tache B.3.2 - Workflow CI frontend,"Configurer lint/tests/build frontend.",High,"task,ci,frontend",FUL-11
+Sub-task,Tache B.3.3 - Gate de qualite merge,"Bloquer merge si checks requis en echec.",Medium,"task,ci,quality-gate",FUL-11
+Sub-task,Tache C.1.1 - Creer modele User,"Entite user + repository + unicite email.",High,"task,auth,backend",FUL-12
+Sub-task,Tache C.1.2 - Implementer register,"Endpoint register + hash BCrypt + validation.",High,"task,auth,backend",FUL-12
+Sub-task,Tache C.1.3 - Implementer login JWT,"Endpoint login + generation JWT.",High,"task,auth,backend",FUL-12
+Sub-task,Tache C.1.4 - Securiser endpoints REST,"Filtre JWT et regles d'acces.",High,"task,security,backend",FUL-12
+Sub-task,Tache C.2.1 - Creer formulaires login/register,"UI auth avec React Hook Form + Zod.",High,"task,auth,frontend",FUL-13
+Sub-task,Tache C.2.2 - Gerer etat auth,"Store global token/utilisateur.",High,"task,auth,frontend",FUL-13
+Sub-task,Tache C.2.3 - Configurer client API JWT,"Intercepteur axios et gestion 401/403.",High,"task,frontend,api",FUL-13
+Sub-task,Tache C.2.4 - Mettre routes protegees,"Guard route + redirection login.",High,"task,frontend,routing",FUL-13
+Sub-task,Tache D.1.1 - Configurer WebSocket et broker,"Configurer handshake et destinations.",High,"task,chat,backend,realtime",FUL-14
+Sub-task,Tache D.1.2 - Implementer routage 1-to-1,"Router message vers destinataire.",High,"task,chat,backend",FUL-14
+Sub-task,Tache D.1.3 - Securiser handshake WebSocket,"Verifier JWT sur connexion WS.",High,"task,security,websocket",FUL-14
+Sub-task,Tache D.1.4 - Persister historique messages,"Sauvegarde et recuperation historique conversation.",High,"task,chat,backend,db",FUL-14
+Sub-task,Tache D.2.1 - Integrer client WebSocket robuste,"Connexion/reconnexion/erreurs cote client.",High,"task,chat,frontend,realtime",FUL-15
+Sub-task,Tache D.2.2 - Construire page de chat,"Contacts, fil discussion, saisie message.",High,"task,chat,frontend,ui",FUL-15
+Sub-task,Tache D.2.3 - Implementer envoi/reception direct,"Mise a jour immediate conversation.",High,"task,chat,frontend,realtime",FUL-15
+Sub-task,Tache D.2.4 - Charger historique initial,"Charger historique REST puis continuer WS.",High,"task,chat,frontend",FUL-15
+Sub-task,Tache E.1.1 - Finaliser CORS et politiques acces,"Whitelist origines et acces.",Medium,"task,security,cors",FUL-16
+Sub-task,Tache E.1.2 - Hygiene secrets configuration,"Externaliser secrets et controles CI.",Medium,"task,security,secrets",FUL-16
+Sub-task,Tache E.2.1 - Logs structures,"Logs coherents backend/frontend.",Medium,"task,observability,logging",FUL-17
+Sub-task,Tache E.3.1 - Tests backend critiques,"Tests services auth/chat.",Medium,"task,tests,backend",FUL-18
+Sub-task,Tache E.3.2 - Tests frontend critiques,"Tests composants/hooks auth/chat.",Medium,"task,tests,frontend",FUL-18
+Sub-task,Tache E.3.3 - Validation E2E manuelle MVP,"Script register->login->chat->historique.",Medium,"task,tests,e2e",FUL-18
+Sub-task,Tache E.4.1 - Dockerfile backend multi-stage,"Build/run backend en image legere.",Medium,"task,docker,backend",FUL-19
+Sub-task,Tache E.4.2 - Dockerfile frontend multi-stage,"Build statique + nginx.",Medium,"task,docker,frontend",FUL-19
+Sub-task,Tache E.4.3 - Orchestration locale compose,"Lancer frontend+backend+postgres.",Medium,"task,docker,compose",FUL-19

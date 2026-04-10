@@ -1,0 +1,56 @@
+Issue ID,Issue Type,Summary,Description,Priority,Labels,Epic Link,Parent ID
+FEAT-A1,Story,Fonctionnalite A.1 - Contrat API et gestion des erreurs,"Definir un langage commun pour les reponses API et les erreurs.",Highest,"feature,api,error-handling",FUL-1,
+FEAT-A2,Story,Fonctionnalite A.2 - Contrat DTO et validation,"Definir des regles strictes pour donnees entrantes/sortantes.",Highest,"feature,dto,validation",FUL-1,
+FEAT-A3,Story,Fonctionnalite A.3 - Definition of Done,"Formaliser la qualite minimale avant merge.",High,"feature,dod",FUL-1,
+FEAT-B1,Story,Fonctionnalite B.1 - Initialisation Backend Spring Boot,"Mettre en place le squelette backend conforme standards.",Highest,"feature,backend,spring",FUL-2,
+FEAT-B2,Story,Fonctionnalite B.2 - Initialisation Frontend React,"Mettre en place un socle frontend modulaire par features.",Highest,"feature,frontend,react",FUL-2,
+FEAT-B3,Story,Fonctionnalite B.3 - CI qualite de base,"Mettre des controles automatiques obligatoires a chaque PR.",High,"feature,ci",FUL-2,
+FEAT-C1,Story,Fonctionnalite C.1 - Auth backend JWT,"Construire endpoints et logique metier auth.",High,"feature,auth,backend",FUL-3,
+FEAT-C2,Story,Fonctionnalite C.2 - Auth frontend,"Construire le parcours utilisateur auth cote client.",High,"feature,auth,frontend",FUL-3,
+FEAT-D1,Story,Fonctionnalite D.1 - Chat backend,"Mettre en place WebSocket, securite et persistence.",High,"feature,chat,backend",FUL-4,
+FEAT-D2,Story,Fonctionnalite D.2 - Chat frontend,"Creer UI chat et logique temps reel.",High,"feature,chat,frontend",FUL-4,
+FEAT-E1,Story,Fonctionnalite E.1 - Securite operationnelle,"Finaliser CORS, acces et hygiene secrets.",Medium,"feature,security",FUL-5,
+FEAT-E2,Story,Fonctionnalite E.2 - Observabilite,"Mettre en place logs structures et correlation basique.",Medium,"feature,observability",FUL-5,
+FEAT-E3,Story,Fonctionnalite E.3 - Qualite et tests critiques,"Ajouter tests backend/frontend et validation e2e manuelle.",Medium,"feature,tests,quality",FUL-5,
+FEAT-E4,Story,Fonctionnalite E.4 - Conteneurisation locale,"Standardiser le run local avec Docker/Compose.",Medium,"feature,docker",FUL-5,
+ST-A11,Sub-task,Tache A.1.1 - Definir ApiResponse standard,"Unifier format success/message/data/errorCode.",Highest,"task,api",,FEAT-A1
+ST-A12,Sub-task,Tache A.1.2 - Definir cartographie des erreurs,"Mapper exception -> statut HTTP -> code erreur -> message.",High,"task,error-handling",,FEAT-A1
+ST-A21,Sub-task,Tache A.2.1 - Definir conventions DTO Request/Response,"Decoupler API publique et modele persistence.",Highest,"task,dto",,FEAT-A2
+ST-A22,Sub-task,Tache A.2.2 - Definir politique de validation backend/frontend,"Aligner validation @Valid et schemas frontend.",High,"task,validation",,FEAT-A2
+ST-A31,Sub-task,Tache A.3.1 - Definir DoD Backend,"Checklist qualite backend avant merge.",Medium,"task,dod",,FEAT-A3
+ST-A32,Sub-task,Tache A.3.2 - Definir DoD Frontend,"Checklist qualite frontend avant merge.",Medium,"task,dod",,FEAT-A3
+ST-A33,Sub-task,Tache A.3.3 - Definir DoD CI/CD,"Checks obligatoires de merge.",Medium,"task,dod,ci",,FEAT-A3
+ST-B11,Sub-task,Tache B.1.1 - Initialiser projet Spring Boot,"Creer base Java 21 + dependances coeur.",Highest,"task,backend,spring",,FEAT-B1
+ST-B12,Sub-task,Tache B.1.2 - Configurer PostgreSQL et profils,"Configurer dev/test et externaliser secrets.",High,"task,backend,db",,FEAT-B1
+ST-B13,Sub-task,Tache B.1.3 - Mettre en place architecture en couches,"Structurer packages controller/service/repository/dto/config.",High,"task,backend,architecture",,FEAT-B1
+ST-B21,Sub-task,Tache B.2.1 - Initialiser React Vite TS strict,"Configurer frontend strict sans any.",Highest,"task,frontend,react",,FEAT-B2
+ST-B22,Sub-task,Tache B.2.2 - Installer dependances frontend,"Installer router, axios, query, zustand, rhf, zod.",High,"task,frontend,dependencies",,FEAT-B2
+ST-B23,Sub-task,Tache B.2.3 - Structurer frontend par features,"Creer features/auth, features/chat, shared/lib, shared/ui.",High,"task,frontend,architecture",,FEAT-B2
+ST-B31,Sub-task,Tache B.3.1 - Workflow CI backend,"Configurer lint/tests/build backend.",High,"task,ci,backend",,FEAT-B3
+ST-B32,Sub-task,Tache B.3.2 - Workflow CI frontend,"Configurer lint/tests/build frontend.",High,"task,ci,frontend",,FEAT-B3
+ST-B33,Sub-task,Tache B.3.3 - Gate de qualite merge,"Bloquer merge si checks requis en echec.",Medium,"task,ci,quality-gate",,FEAT-B3
+ST-C11,Sub-task,Tache C.1.1 - Creer modele User,"Entite user + repository + unicite email.",High,"task,auth,backend",,FEAT-C1
+ST-C12,Sub-task,Tache C.1.2 - Implementer register,"Endpoint register + hash BCrypt + validation.",High,"task,auth,backend",,FEAT-C1
+ST-C13,Sub-task,Tache C.1.3 - Implementer login JWT,"Endpoint login + generation JWT.",High,"task,auth,backend",,FEAT-C1
+ST-C14,Sub-task,Tache C.1.4 - Securiser endpoints REST,"Filtre JWT et regles d'acces.",High,"task,security,backend",,FEAT-C1
+ST-C21,Sub-task,Tache C.2.1 - Creer formulaires login/register,"UI auth avec React Hook Form + Zod.",High,"task,auth,frontend",,FEAT-C2
+ST-C22,Sub-task,Tache C.2.2 - Gerer etat auth,"Store global token/utilisateur.",High,"task,auth,frontend",,FEAT-C2
+ST-C23,Sub-task,Tache C.2.3 - Configurer client API JWT,"Intercepteur axios et gestion 401/403.",High,"task,frontend,api",,FEAT-C2
+ST-C24,Sub-task,Tache C.2.4 - Mettre routes protegees,"Guard route + redirection login.",High,"task,frontend,routing",,FEAT-C2
+ST-D11,Sub-task,Tache D.1.1 - Configurer WebSocket et broker,"Configurer handshake et destinations.",High,"task,chat,backend,realtime",,FEAT-D1
+ST-D12,Sub-task,Tache D.1.2 - Implementer routage 1-to-1,"Router message vers destinataire.",High,"task,chat,backend",,FEAT-D1
+ST-D13,Sub-task,Tache D.1.3 - Securiser handshake WebSocket,"Verifier JWT sur connexion WS.",High,"task,security,websocket",,FEAT-D1
+ST-D14,Sub-task,Tache D.1.4 - Persister historique messages,"Sauvegarde et recuperation historique conversation.",High,"task,chat,backend,db",,FEAT-D1
+ST-D21,Sub-task,Tache D.2.1 - Integrer client WebSocket robuste,"Connexion/reconnexion/erreurs cote client.",High,"task,chat,frontend,realtime",,FEAT-D2
+ST-D22,Sub-task,Tache D.2.2 - Construire page de chat,"Contacts, fil discussion, saisie message.",High,"task,chat,frontend,ui",,FEAT-D2
+ST-D23,Sub-task,Tache D.2.3 - Implementer envoi/reception direct,"Mise a jour immediate conversation.",High,"task,chat,frontend,realtime",,FEAT-D2
+ST-D24,Sub-task,Tache D.2.4 - Charger historique initial,"Charger historique REST puis continuer WS.",High,"task,chat,frontend",,FEAT-D2
+ST-E11,Sub-task,Tache E.1.1 - Finaliser CORS et politiques acces,"Whitelist origines et acces.",Medium,"task,security,cors",,FEAT-E1
+ST-E12,Sub-task,Tache E.1.2 - Hygiene secrets configuration,"Externaliser secrets et controles CI.",Medium,"task,security,secrets",,FEAT-E1
+ST-E21,Sub-task,Tache E.2.1 - Logs structures,"Logs coherents backend/frontend.",Medium,"task,observability,logging",,FEAT-E2
+ST-E31,Sub-task,Tache E.3.1 - Tests backend critiques,"Tests services auth/chat.",Medium,"task,tests,backend",,FEAT-E3
+ST-E32,Sub-task,Tache E.3.2 - Tests frontend critiques,"Tests composants/hooks auth/chat.",Medium,"task,tests,frontend",,FEAT-E3
+ST-E33,Sub-task,Tache E.3.3 - Validation E2E manuelle MVP,"Script register->login->chat->historique.",Medium,"task,tests,e2e",,FEAT-E3
+ST-E41,Sub-task,Tache E.4.1 - Dockerfile backend multi-stage,"Build/run backend en image legere.",Medium,"task,docker,backend",,FEAT-E4
+ST-E42,Sub-task,Tache E.4.2 - Dockerfile frontend multi-stage,"Build statique + nginx.",Medium,"task,docker,frontend",,FEAT-E4
+ST-E43,Sub-task,Tache E.4.3 - Orchestration locale compose,"Lancer frontend+backend+postgres.",Medium,"task,docker,compose",,FEAT-E4
