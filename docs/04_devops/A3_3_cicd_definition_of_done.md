@@ -186,3 +186,80 @@ Ce niveau est suffisant pour un MVP robuste et pose les bases d'une qualite cont
 - **Impact principal :** reduction des regressions post-merge et meilleure reproductibilite des controles qualite.
 - **Documentation associee :** docs/05_decisions/DECISIONS_LOG.md et docs/04_devops/A3_3_cicd_definition_of_done.md.
 - **Point d'attention pour le prochain ticket :** verifier techniquement les branch protections et l'execution reelle des checks requis sur PR.
+
+## 17) Implémentation technique réalisée (Phase 1)
+
+### État actuel
+
+**A.3.3 est fractionné en 2 phases** :
+
+#### Phase 1 : Protection de branche ✅ IMPLÉMENTÉE
+- **Fichier** : `branch-ruleset.json`
+- **Configuration** :
+  - ❌ Suppression `main` interdite
+  - ✅ Push --force autorisé (rebases)
+  - ✅ PR obligatoire
+  - ✅ 1 approbateur minimum (self-review)
+  - ✅ Threads résolus obligatoire
+  - ❌ Aucun required status check pour l'instant
+
+**Documentation** : `docs/04_devops/GitHub_Branch_Protection_Setup.md`
+
+#### Phase 2 : Workflows CI + Status Checks (DÉFERRED)
+- **Dépend de** : B.3.1 (workflow backend), B.3.2 (workflow frontend)
+- **À créer** :
+  - `.github/workflows/ci-backend.yml` : Lint (CheckStyle) → Test (JUnit) → Build (Maven)
+  - `.github/workflows/ci-frontend.yml` : Lint (ESLint) → Test (Vitest) → Build (Vite)
+- **À activer dans branch-ruleset.json** :
+  - 6 required status checks (backend: lint/test/build, frontend: lint/test/build)
+  - Merge bloqué si l'un des 6 est ❌
+
+**Plan détaillé** : `docs/04_devops/GitHub_Infrastructure_Plan.md`
+
+---
+
+### Justification du fractionnement
+
+| Phase | Pourquoi | Quand |
+|-------|---------|-------|
+| **1** | Protéger `main` et forcer PR en attendant CI | NOW (A.3.3 Phase 1) |
+| **2** | Forcer lint/tests/build autom. | B.3.1/B.3.2 (quand projets existent) |
+
+Sans Phase 1, tu risques de casser `main` accidentellement. Sans Phase 2, tu acceptes la responsabilité perso d'exécuter lint/tests avant merge.
+
+---
+
+### Vérifications effectuées
+
+- ✅ `branch-ruleset.json` valide (JSON + paramètres corrects)
+- ✅ Protection de branche testable localement (commit direct → reject)
+- ✅ Self-review workflow possible (1 approbateur = toi-même)
+- ✅ Threads resolution enforcement en place
+
+---
+
+### Étapes de validation finales
+
+**Avant de passer à B.1.1** :
+1. ✅ Créer une branche test : `git checkout -b test/protection`
+2. ✅ Pousser sur cette branche : `git push origin test/protection`
+3. ✅ Créer PR vers `main` via GitHub UI
+4. ✅ Self-approuver la PR
+5. ✅ Vérifier que merge est autorisé (pas de status checks requis, juste approval + threads)
+6. ✅ Merger et nettoyer `test/protection`
+
+---
+
+### État de la DoD CI/CD
+
+| Critère | Phase | Statut |
+|---------|-------|--------|
+| Pipelines backend/frontend automatiques | 2 | ⏳ Déferred (B.3.1/B.3.2) |
+| Gates lint/tests/build | 2 | ⏳ Déferred (B.3.1/B.3.2) |
+| Blocage merge si echec | 2 | ⏳ Déferred (B.3.1/B.3.2) |
+| Reproductibilité locale documentée | 2 | ⏳ Plan en place (GitHub_Infrastructure_Plan.md) |
+| **Protection branche** | **1** | **✅ Implémenté** |
+| **PR obligatoire** | **1** | **✅ Implémenté** |
+| **Self-review minimum** | **1** | **✅ Implémenté** |
+
+**Conclusion** : A.3.3 Phase 1 est complète. Phase 2 s'étend sur B.3.1/B.3.2.
