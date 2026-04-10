@@ -57,9 +57,14 @@ Priorités : Sécurité (Zero Trust local), maintenabilité (Clean Code, SOLID),
   3. Build des artefacts (Jar, build Vite).
 - Conteneurisation : Créer un `Dockerfile` multi-stage (builder -> runner) pour le backend et le frontend (avec Nginx) afin de minimiser le poids de l'image finale.
 
-### Naming Conventions Git
-- Branches : `feature/nom-de-la-feature`, `bugfix/nom-du-bug`, `main`.
-- Commits : Suivre les Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`).
+### Protocole Git & Naming Conventions
+- SÉCURITÉ : La branche `main` est protégée. Le push direct est strictement interdit.
+- Workflow obligatoire :
+  1. Créer une branche depuis `main` (`feature/xxx`, `bugfix/xxx`, `chore/xxx`).
+  2. Développer et commiter en suivant les Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`).
+  3. Pousser la branche et créer une Pull Request vers `main`.
+- IA : Si l'utilisateur te demande de sauvegarder ou de pousser du code, génère TOUJOURS les commandes pour créer une nouvelle branche et faire un push de cette branche, jamais vers `main`.
+- Commits : Suivre les conventions de gitmoji.dev pour les messages de commit (ex: `✨ add user authentication`).
 
 ---
 
