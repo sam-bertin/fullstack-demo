@@ -246,3 +246,31 @@ Temps de feedback CI potentiellement plus long, mais reduction forte des regress
   - `docs/04_devops/GitHub_Infrastructure_Plan.md` (Phase 2 - plan pour B.3.1/B.3.2)
 - **Artefacts Phase 1** : `branch-ruleset.json` (mis à jour)
 - **PR/Commit (si disponible)** : à renseigner lors du push infrastructure
+
+### Decision 2026-04-10 - B.2.1
+
+#### Contexte
+Le scaffold Vite React TypeScript propose React 19 par defaut. La planification frontend mentionnait React 18 dans la documentation de conventions.
+
+#### Decision retenue
+Valider l'evolution de plan frontend vers React 19 pour B.2.1 et aligner le socle genere (runtime + types) sur cette version.
+
+#### Alternatives considerees
+- Forcer un downgrade en React 18 pour rester strictement sur l'ancienne convention.
+- Conserver React 19 en code sans mettre a jour la documentation (rejete pour manque de clarte).
+
+#### Compromis
+Adoption rapide des versions recentes avec necessite de maintenir la compatibilite des bibliotheques de l'ecosysteme lors des prochaines taches.
+
+#### Impacts
+- **Court terme :** dependances frontend alignees sur React 19, lint/build verifies verts.
+- **Long terme :** conventions frontend mises a jour et reduction des ecarts entre scaffold officiel et standards projet.
+
+#### Actions de suivi
+- **Action 1 :** verifier la compatibilite des dependances B.2.2 avec React 19.
+- **Action 2 :** maintenir les docs de stack et onboarding synchronisees avec cette decision.
+
+#### Liens
+- **Jira :** B.2.1
+- **Documentation associee :** docs/03_frontend/B2_1_react_vite_typescript_strict.md
+- **PR/Commit (si disponible) :** a renseigner
