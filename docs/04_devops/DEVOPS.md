@@ -13,6 +13,7 @@
 - Branching model.
 - Conventional commits.
 - PR vers main uniquement.
+- Templates PR separes: `.github/PULL_REQUEST_TEMPLATE/backend.md` et `.github/PULL_REQUEST_TEMPLATE/frontend.md`.
 
 ## Verification release locale
 - Commandes exactes.

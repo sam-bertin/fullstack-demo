@@ -2,7 +2,7 @@
 Application web distribuée. Le backend expose une API RESTful sécurisée. Le frontend est une Single Page Application (SPA) réactive.
 Priorités : Sécurité (Zero Trust local), maintenabilité (Clean Code, SOLID), scalabilité.
 
-**PLAN DE PROJET :** Se référer au fichier `PROJECT_PLAN.md` à la racine pour suivre la feuille de route (EPIC -> Fonctionnalité -> Tâche). L'agent doit être conscient de l'état d'avancement et proposer des mises à jour du plan si de nouvelles fonctionnalités sont décidées.
+**PLAN DE PROJET :** Se référer au fichier `PROJECT_PLAN.md` à la racine pour suivre la feuille de route (EPIC -> Fonctionnalité -> Tâche). Ce fichier reflète l'état initial du Jira et ne doit pas être modifie pour reconsigner des decisions de conception. Les decisions, compromis, impacts et textes de synthese doivent etre traces dans `docs/` et dans les commentaires Jira proposes.
 ---
 
 ## 1. BACKEND (Java 21, Spring Boot 3.x, Maven, PostgreSQL)
@@ -107,9 +107,11 @@ Priorités : Sécurité (Zero Trust local), maintenabilité (Clean Code, SOLID),
 - Sequence imposee : discussion -> validation des decisions -> documentation detaillee -> implementation.
 - L'agent doit rediger la documentation, pas l'utilisateur.
 - Tant que la decision n'est pas validee par l'utilisateur, l'agent ne lance pas l'implementation.
-- Pour chaque tache Jira validee, l'agent doit remplir une fiche basee sur `docs/TASK_DOC_TEMPLATE.md` dans le dossier `docs/` approprie (ex: `docs/02_backend/FUL-23.md`).
-- La fiche doit etre creee/mise a jour au minimum avant ou pendant l'implementation, puis finalisee en fin de tache avec resultats, tests et impacts.
+- Pour chaque tache Jira validee, l'agent doit creer ou mettre a jour une fiche basee sur `docs/TASK_DOC_TEMPLATE.md` dans le dossier `docs/` approprie (ex: `docs/02_backend/FUL-23.md`).
+- La fiche doit etre creee/mise a jour avant toute implementation, puis finalisee en fin de tache avec resultats, tests et impacts.
 - Chaque fiche doit inclure explicitement : contexte, choix retenus, alternatives, compromis, etapes realisees, verification, impacts, et references Jira/GitHub.
+- L'agent doit aussi proposer, a la fin de chaque decision ou implementation importante, un texte court pret a coller dans Jira pour annoter le ticket (resume de la decision, impact, lien vers la documentation).
+- Si une nouvelle fonctionnalite est decidee, l'agent doit proposer une evolution de `PROJECT_PLAN.md` seulement pour la reflecter dans Jira si le backlog change; sinon la trace de la decision reste dans `docs/05_decisions/` et dans la fiche de tache.
 
 ### Regle de definition de termine (DoD documentaire)
 - Une tache est "Done" uniquement si :
