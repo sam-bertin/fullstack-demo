@@ -36,6 +36,7 @@ jobs:
   test:
     name: Unit Tests (JUnit 5)
     runs-on: ubuntu-latest
+    needs: [lint]
     defaults:
       run:
         working-directory: backend/backend
@@ -58,7 +59,7 @@ jobs:
   build:
     name: Build (Maven)
     runs-on: ubuntu-latest
-    needs: [lint, test]
+    needs: [test]
     defaults:
       run:
         working-directory: backend/backend
