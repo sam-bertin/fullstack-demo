@@ -2,6 +2,7 @@
 Application web distribuée. Le backend expose une API RESTful sécurisée. Le frontend est une Single Page Application (SPA) réactive.
 Priorités : Sécurité (Zero Trust local), maintenabilité (Clean Code, SOLID), scalabilité.
 
+**PLAN DE PROJET :** Se référer au fichier `PROJECT_PLAN.md` à la racine pour suivre la feuille de route (EPIC -> Fonctionnalité -> Tâche). L'agent doit être conscient de l'état d'avancement et proposer des mises à jour du plan si de nouvelles fonctionnalités sont décidées.
 ---
 
 ## 1. BACKEND (Java 21, Spring Boot 3.x, Maven, PostgreSQL)
@@ -68,8 +69,60 @@ Priorités : Sécurité (Zero Trust local), maintenabilité (Clean Code, SOLID),
 
 ---
 
+## 4. DOCUMENTATION & ONBOARDING (OBLIGATOIRE)
+
+### Objectif
+- La documentation fait partie du livrable, au meme titre que le code.
+- Une fonctionnalite n'est pas consideree comme terminee tant que sa documentation n'est pas a jour.
+- La documentation doit permettre a une personne externe de comprendre le "quoi", le "pourquoi", le "comment", et de reproduire l'environnement sans connaissance implicite.
+
+### References projet
+- Jira (source de verite du backlog et du statut) : https://reptar.atlassian.net/jira/software/c/projects/FUL/boards/3
+- GitHub (source de verite du code) : https://github.com/sam-bertin/fullstack-demo
+
+### Exigences de documentation (niveau hyper exhaustif)
+- Documenter chaque tache Jira implementee, y compris le contexte, les choix, les alternatives et les impacts.
+- Expliquer explicitement les decisions techniques et les compromis (performance, securite, complexite, cout de maintenance).
+- Fournir les prerequis, commandes exactes, variables d'environnement requises, et resultats attendus.
+- Decrire les schemas de donnees, contrats API, flux d'evenements et comportements d'erreur.
+- Lier chaque changement a la cle Jira concernee (ex: `FUL-23`) dans la documentation technique.
+- Maintenir une trace chronologique des evolutions (decision log / changelog technique).
+
+### Structure documentaire attendue dans la codebase
+- `docs/00_onboarding/` : installation locale, prerequis, premier demarrage, depannage de base.
+- `docs/01_architecture/` : vues d'architecture, couches applicatives, conventions, diagrammes.
+- `docs/02_backend/` : modules backend, endpoints, securite, validation, persistence.
+- `docs/03_frontend/` : structure feature-based, flux UI, etat global, appels API.
+- `docs/04_devops/` : CI/CD, Docker, workflows Git, procedure de release locale.
+- `docs/05_decisions/` : ADR (Architecture Decision Records) et compromis.
+- `docs/06_runbooks/` : procedures operationnelles (incident, rollback, verification).
+
+### Rituels obligatoires lors de chaque implementation
+- Avant implementation : verifier `PROJECT_PLAN.md` et identifier la cle Jira associee.
+- Pendant implementation : noter decisions et hypotheses.
+- Apres implementation : mettre a jour la documentation dans `docs/` avec exemples executables.
+- Avant cloture de la tache : valider que code, tests, CI et documentation sont coherents.
+
+### Workflow de collaboration obligatoire avec l'agent
+- Sequence imposee : discussion -> validation des decisions -> documentation detaillee -> implementation.
+- L'agent doit rediger la documentation, pas l'utilisateur.
+- Tant que la decision n'est pas validee par l'utilisateur, l'agent ne lance pas l'implementation.
+- Pour chaque tache Jira validee, l'agent doit remplir une fiche basee sur `docs/TASK_DOC_TEMPLATE.md` dans le dossier `docs/` approprie (ex: `docs/02_backend/FUL-23.md`).
+- La fiche doit etre creee/mise a jour au minimum avant ou pendant l'implementation, puis finalisee en fin de tache avec resultats, tests et impacts.
+- Chaque fiche doit inclure explicitement : contexte, choix retenus, alternatives, compromis, etapes realisees, verification, impacts, et references Jira/GitHub.
+
+### Regle de definition de termine (DoD documentaire)
+- Une tache est "Done" uniquement si :
+  1. le code est implemente et teste,
+  2. la documentation associee est mise a jour,
+  3. la cle Jira est referencee dans les sections impactees,
+  4. un onboarding partiel est possible sans explication orale.
+
+---
+
 ## DIRECTIVES GÉNÉRALES POUR L'IA
 - Fournis uniquement du code prêt pour la production.
 - Ajoute des commentaires JSDoc/JavaDoc sur les méthodes complexes.
 - N'invente pas de dépendances ; utilise les standards de l'écosystème spécifié.
 - Si une modification nécessite de mettre à jour les variables d'environnement (`.env`), signale-le explicitement.
+- Toute modification technique doit inclure la mise a jour de la documentation correspondante dans `docs/`.
