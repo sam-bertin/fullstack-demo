@@ -236,6 +236,8 @@ Sans Phase 1, tu risques de casser `main` accidentellement. Sans Phase 2, tu acc
 - ✅ Self-review workflow possible (1 approbateur = toi-même)
 - ✅ Threads resolution enforcement en place
 - ✅ CI backend implémentée: lint Checkstyle, tests JUnit 5, build Maven
+- ✅ CI backend déclenchée au push uniquement
+- ✅ Cache Maven partagé entre jobs CI
 - ✅ Checks requis alignés avec `ci-backend.yml`
 
 ---
@@ -256,12 +258,12 @@ Sans Phase 1, tu risques de casser `main` accidentellement. Sans Phase 2, tu acc
 
 | Critère | Phase | Statut |
 |---------|-------|--------|
-| Pipelines backend/frontend automatiques | 2 | ✅ Backend actif / ⏳ Frontend déferred |
+| Pipelines backend/frontend automatiques | 2 | ✅ Backend actif (push only) / ⏳ Frontend déferred |
 | Gates lint/tests/build | 2 | ✅ Backend actif / ⏳ Frontend déferred |
 | Blocage merge si echec | 2 | ✅ Backend actif via checks requis |
-| Reproductibilité locale documentée | 2 | ✅ Backend documenté / ⏳ Frontend planifié |
+| Reproductibilité locale documentée | 2 | ✅ Backend documenté + cache Maven / ⏳ Frontend planifié |
 | **Protection branche** | **1** | **✅ Implémenté** |
 | **PR obligatoire** | **1** | **✅ Implémenté** |
 | **Self-review minimum** | **1** | **✅ Implémenté** |
 
-**Conclusion** : A.3.3 Phase 1 est complète et la CI backend de la Phase 2 est en place. Le volet frontend reste à implémenter lors de B.3.2.
+**Conclusion** : A.3.3 Phase 1 est complète et la CI backend de la Phase 2 est en place en mode push-only, avec cache Maven partagé. Le volet frontend reste à implémenter lors de B.3.2.

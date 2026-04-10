@@ -6,7 +6,9 @@
 - Merge sur `main` bloque si les checks backend requis sont rouges.
 - Workflow frontend a implementer quand le socle frontend existe.
 - Execution backend CI containerisee: image `maven:3.9-eclipse-temurin-21`.
+- Trigger backend CI: `push` uniquement, avec filtres sur les fichiers backend/workflow.
 - Les commandes CI utilisent `mvn` dans le conteneur (equivalent local: `./mvnw.cmd ...` sous Windows).
+- Cache Maven partage entre jobs: `/root/.m2/repository` via `actions/cache` pour limiter les retelechargements.
 
 ## Docker
 - Dockerfile backend multi-stage.
