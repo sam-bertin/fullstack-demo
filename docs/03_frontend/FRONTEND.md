@@ -1,7 +1,7 @@
 # Frontend
 
 ## Stack
-- React 18, TypeScript strict, Vite, Tailwind.
+- React 19, TypeScript strict, Vite, Tailwind.
 
 ## Organisation
 - Features, composants, hooks, services, stores.
@@ -27,4 +27,6 @@
 - Strategie tests composants/hooks critiques.
 
 ## Trace Jira
-- Ticket(s): a renseigner.
+- Ticket(s): B.2.1 initialise (socle React + Vite + TypeScript strict).
+- Documentation de tache: docs/03_frontend/B2_1_react_vite_typescript_strict.md
+- Evolution de plan: adoption React 19 validee et tracee dans docs/05_decisions/DECISIONS_LOG.md.

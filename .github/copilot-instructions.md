@@ -27,7 +27,7 @@ Priorités : Sécurité (Zero Trust local), maintenabilité (Clean Code, SOLID),
 
 ---
 
-## 2. FRONTEND (React 18, TypeScript, Vite, Tailwind CSS)
+## 2. FRONTEND (React 19, TypeScript, Vite, Tailwind CSS)
 
 ### Architecture & State Management
 - Structure par "Features" : Regrouper les fichiers par domaine (`/features/auth`, `/features/users`) contenant leurs propres composants, hooks et types.
