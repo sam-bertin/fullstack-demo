@@ -14,70 +14,46 @@ jobs:
   lint:
     name: Lint (Checkstyle)
     runs-on: ubuntu-latest
+    container:
+      image: maven:3.9-eclipse-temurin-21
     defaults:
       run:
         working-directory: backend/backend
     steps:
       - uses: actions/checkout@v4
 
-      - name: Ensure Maven wrapper is executable
-        run: chmod +x ./mvnw
-
-      - name: Set up Java 21
-        uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-          cache: maven
-
       - name: Run Checkstyle
-        run: ./mvnw -q checkstyle:check
+        run: mvn -q checkstyle:check
 
   test:
     name: Unit Tests (JUnit 5)
     runs-on: ubuntu-latest
     needs: [lint]
+    container:
+      image: maven:3.9-eclipse-temurin-21
     defaults:
       run:
         working-directory: backend/backend
     steps:
       - uses: actions/checkout@v4
 
-      - name: Ensure Maven wrapper is executable
-        run: chmod +x ./mvnw
-
-      - name: Set up Java 21
-        uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-          cache: maven
-
       - name: Run tests
-        run: ./mvnw -q test
+        run: mvn -q test
 
   build:
     name: Build (Maven)
     runs-on: ubuntu-latest
     needs: [test]
+    container:
+      image: maven:3.9-eclipse-temurin-21
     defaults:
       run:
         working-directory: backend/backend
     steps:
       - uses: actions/checkout@v4
 
-      - name: Ensure Maven wrapper is executable
-        run: chmod +x ./mvnw
-
-      - name: Set up Java 21
-        uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-          cache: maven
-
       - name: Build JAR
-        run: ./mvnw -q -DskipTests clean package
+        run: mvn -q -DskipTests clean package
 
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
