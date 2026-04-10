@@ -5,6 +5,7 @@
 - Gates qualite backend: Checkstyle, tests JUnit 5, build Maven.
 - Merge sur `main` bloque si les checks backend requis sont rouges.
 - Workflow frontend a implementer quand le socle frontend existe.
+- Pre-requis runner Linux: rendre le wrapper Maven executable (`chmod +x ./mvnw`) avant les commandes Maven.
 
 ## Docker
 - Dockerfile backend multi-stage.
