@@ -8,7 +8,7 @@
 - Execution backend CI containerisee: image `maven:3.9-eclipse-temurin-21`.
 - Trigger backend CI: `push` uniquement, avec filtres sur les fichiers backend/workflow.
 - Les commandes CI utilisent `mvn` dans le conteneur (equivalent local: `./mvnw.cmd ...` sous Windows).
-- Cache Maven partage entre jobs: `/root/.m2/repository` via `actions/cache` pour limiter les retelechargements.
+- Cache Maven gere par `actions/setup-java@v4` avec `cache: 'maven'` dans chaque job.
 
 ## Docker
 - Dockerfile backend multi-stage.

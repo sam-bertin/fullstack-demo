@@ -18,13 +18,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Restore Maven cache
-        uses: actions/cache@v4
+      - name: Setup Java et Maven Cache
+        uses: actions/setup-java@v4
         with:
-          path: /root/.m2/repository
-          key: maven-${{ runner.os }}-${{ hashFiles('backend/backend/pom.xml') }}
-          restore-keys: |
-            maven-${{ runner.os }}-
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'maven'
 
       - name: Run Checkstyle
         run: mvn -q checkstyle:check
@@ -41,13 +40,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Restore Maven cache
-        uses: actions/cache@v4
+      - name: Setup Java et Maven Cache
+        uses: actions/setup-java@v4
         with:
-          path: /root/.m2/repository
-          key: maven-${{ runner.os }}-${{ hashFiles('backend/backend/pom.xml') }}
-          restore-keys: |
-            maven-${{ runner.os }}-
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'maven'
 
       - name: Run tests
         run: mvn -q test
@@ -64,13 +62,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Restore Maven cache
-        uses: actions/cache@v4
+      - name: Setup Java et Maven Cache
+        uses: actions/setup-java@v4
         with:
-          path: /root/.m2/repository
-          key: maven-${{ runner.os }}-${{ hashFiles('backend/backend/pom.xml') }}
-          restore-keys: |
-            maven-${{ runner.os }}-
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'maven'
 
       - name: Build JAR
         run: mvn -q -DskipTests clean package
