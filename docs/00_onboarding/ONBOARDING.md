@@ -256,6 +256,23 @@ Entree courante (validation B.2.1 - socle frontend):
 - Action suivante:
 	- Enchainer sur B.2.2 pour installer les dependances coeur frontend (react-router-dom, axios, @tanstack/react-query, zustand, react-hook-form, zod).
 
+Entree courante (validation B.3.2 - CI frontend):
+- Date: 2026-04-10
+- Cle Jira: B.3.2
+- Contexte: ajout d'un workflow GitHub Actions frontend aligne sur le backend avec jobs sequentiels lint/test/build.
+- Commandes executees:
+	- `npm install -D vitest`
+	- `npm run lint`
+	- `npm run test`
+	- `npm run build`
+- Resultat observe:
+	- `LINT_OK`
+	- `TEST_OK` (Vitest: 1 test smoke passe)
+	- `BUILD_OK`
+	- Artefact frontend `dist/` genere.
+- Action suivante:
+	- Enchainer sur B.3.3 pour activer les checks frontend comme required status checks sur `main`.
+
 
 
 

@@ -2,13 +2,17 @@
 
 ## CI/CD
 - Workflow backend actif: `.github/workflows/ci-backend.yml`.
+- Workflow frontend actif: `.github/workflows/ci-frontend.yml`.
 - Gates qualite backend: Checkstyle, tests JUnit 5, build Maven.
+- Gates qualite frontend: ESLint, tests Vitest, build Vite.
 - Merge sur `main` bloque si les checks backend requis sont rouges.
-- Workflow frontend a implementer quand le socle frontend existe.
 - Trigger backend CI: `push` uniquement, avec filtres sur les fichiers backend/workflow.
+- Trigger frontend CI: `push` uniquement, avec filtres sur les fichiers frontend/workflow.
 - Execution backend CI sur runner natif `ubuntu-latest` avec `./mvnw`.
+- Execution frontend CI sur runner natif `ubuntu-latest` avec `npm ci`.
 - Le wrapper Maven du depot porte la version Maven, `setup-java` ne gere que le JDK 21 et le cache Maven.
 - Cache Maven gere par `actions/setup-java@v4` avec `cache: 'maven'` dans chaque job.
+- Cache npm frontend gere par `actions/setup-node@v4` avec `cache: 'npm'` et `cache-dependency-path: frontend/package-lock.json`.
 
 ## Docker
 - Dockerfile backend multi-stage.
@@ -51,11 +55,23 @@
 - `.\mvnw.cmd -DskipTests clean package`
 - Attendu: `LINT_OK`, `TEST_OK`, `PACKAGE_OK`
 
+### Commandes minimales de verification CI frontend
+- `cd frontend`
+- `npm ci`
+- `npm run lint`
+- `npm run test`
+- `npm run build`
+- Attendu: `LINT_OK`, `TEST_OK`, `BUILD_OK`
+
 ### Branch protection backend
 - `branch-ruleset.json` exige pour `main`:
 	- `CI Backend / Lint (Checkstyle)`
 	- `CI Backend / Unit Tests (JUnit 5)`
 	- `CI Backend / Build (Maven)`
+
+### Branch protection frontend
+- Les checks frontend sont maintenant disponibles via le workflow CI Frontend.
+- Leur activation comme checks requis de merge est prevue dans B.3.3.
 
 ## Trace Jira
 - Ticket(s): a renseigner.

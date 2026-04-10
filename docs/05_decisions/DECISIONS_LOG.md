@@ -274,3 +274,37 @@ Adoption rapide des versions recentes avec necessite de maintenir la compatibili
 - **Jira :** B.2.1
 - **Documentation associee :** docs/03_frontend/B2_1_react_vite_typescript_strict.md
 - **PR/Commit (si disponible) :** a renseigner
+
+### Decision 2026-04-10 - B.3.2
+
+#### Contexte
+La CI backend etait deja active, mais le frontend ne disposait pas encore de pipeline automatique lint/tests/build.
+
+#### Decision retenue
+Implementer un workflow CI Frontend distinct et structure comme le backend, avec trois jobs sequentiels :
+- Lint (ESLint)
+- Unit Tests (Vitest)
+- Build (Vite)
+
+Le workflow publie egalement l'artefact frontend `dist/`.
+
+#### Alternatives considerees
+- Pipeline frontend en job unique lint+test+build.
+- Pipeline frontend sans tests unitaires.
+- Validation uniquement locale sans workflow CI dedie.
+
+#### Compromis
+Pipeline un peu plus long qu'un job unique, mais meilleure lisibilite des echecs et alignement fort avec la strategie qualite backend.
+
+#### Impacts
+- **Court terme :** couverture CI frontend immediate avec verifications automatisees reproductibles localement.
+- **Long terme :** reduction des regressions UI/types avant merge et facilitation de l'activation des required status checks en B.3.3.
+
+#### Actions de suivi
+- **Action 1 :** activer les checks frontend en requis dans `branch-ruleset.json` (B.3.3).
+- **Action 2 :** enrichir progressivement les tests frontend au-dela du smoke test initial.
+
+#### Liens
+- **Jira :** B.3.2
+- **Documentation associee :** docs/04_devops/B3_2_ci_frontend_workflow.md
+- **PR/Commit (si disponible) :** a renseigner
