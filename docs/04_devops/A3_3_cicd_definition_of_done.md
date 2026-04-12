@@ -36,7 +36,7 @@
 - [x] Lint/tests/build executes automatiquement.
 - [x] Nommage des checks aligne entre workflows et protection de branche.
 - [x] Documentation de reproduction locale disponible.
-- [x] Source de verite branch protection committee.
+- [x] Source de verite branch protection versionnee.
 
 ## 5) Verification locale
 ### Frontend (execute dans cet environnement)
