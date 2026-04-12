@@ -26,6 +26,7 @@ Structure:
 - `04_devops/` : CI/CD, Docker, workflow Git, checks qualite.
 - `05_decisions/` : ADR et journal des compromis.
 - `06_runbooks/` : procedures operationnelles.
+- `STATUS_DASHBOARD.md` : matrice d'etat courante mappee aux cles Jira.
 
 Template operationnel:
 - `TASK_DOC_TEMPLATE.md` : fiche standard Jira -> documentation a remplir pour chaque tache implementee.

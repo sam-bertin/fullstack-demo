@@ -69,13 +69,14 @@ DoD frontend composee des blocs suivants:
 - Session coherente sur navigation/refresh.
 
 6. **Tests**
-- Tests composants/hooks mis a jour.
-- Au moins un cas nominal et un cas d'erreur UI.
+- **Phase bootstrap (etat actuel)**: smoke baseline obligatoire (Vitest vert).
+- **Phase features (prochaine etape)**: tests composants/hooks mis a jour avec au moins un cas nominal et un cas d'erreur UI.
 
 7. **Qualite statique**
 - Lint frontend vert.
 - Build frontend vert.
 - CI frontend verte.
+- En bootstrap, le niveau minimum exige: lint + smoke test + build.
 
 8. **Documentation**
 - Fiche tache docs a jour.
@@ -154,6 +155,12 @@ La checklist retenue couvre les zones de risque critiques du frontend sans atten
 
 ### Resultats
 - Non executes a ce stade (phase de cadrage).
+
+### Critere minimum avant auth/chat (C.* / D.*)
+- `npm run lint` vert.
+- `npm run test` vert (au moins la smoke baseline).
+- `npm run build` vert.
+- La smoke baseline seule n'est plus suffisante des qu'une feature metier est livree.
 
 ### Verification manuelle
 - Rejouer le scenario principal impacte et verifier les cas d'erreur associes.

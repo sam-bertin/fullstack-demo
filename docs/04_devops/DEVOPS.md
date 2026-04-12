@@ -5,7 +5,6 @@
 - Workflow frontend actif: `.github/workflows/ci-frontend.yml`.
 - Gates qualite backend: Checkstyle, tests JUnit 5, build Maven.
 - Gates qualite frontend: ESLint, tests Vitest, build Vite.
-- Merge sur `main` bloque si les checks backend requis sont rouges.
 - Trigger backend CI: `push` uniquement, avec filtres sur les fichiers backend/workflow.
 - Trigger frontend CI: `push` uniquement, avec filtres sur les fichiers frontend/workflow.
 - Execution backend CI sur runner natif `ubuntu-latest` avec `./mvnw`.
@@ -13,6 +12,7 @@
 - Le wrapper Maven du depot porte la version Maven, `setup-java` ne gere que le JDK 21 et le cache Maven.
 - Cache Maven gere par `actions/setup-java@v4` avec `cache: 'maven'` dans chaque job.
 - Cache npm frontend gere par `actions/setup-node@v4` avec `cache: 'npm'` et `cache-dependency-path: frontend/package-lock.json`.
+- Merge sur `main` bloque si un check requis est rouge (source de verite: `branch-ruleset.json`).
 
 ## Docker
 - Dockerfile backend multi-stage.
@@ -70,11 +70,13 @@
 	- `CI Backend / Build (Maven)`
 
 ### Branch protection frontend
-- Les checks frontend sont maintenant disponibles via le workflow CI Frontend.
-- Leur activation comme checks requis de merge est prevue dans B.3.3.
+- Les checks frontend sont disponibles via le workflow CI Frontend.
+- Les checks requis actifs dans `branch-ruleset.json`:
+	- `CI Frontend / Lint (ESLint)`
+	- `CI Frontend / Unit Tests (Vitest)`
+	- `CI Frontend / Build (Vite)`
 
 ## Trace Jira
-- Ticket(s): a renseigner.
-
+- A.3.3, B.3.1, B.3.2, B.3.3.
 
 

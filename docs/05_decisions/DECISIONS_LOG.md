@@ -308,3 +308,34 @@ Pipeline un peu plus long qu'un job unique, mais meilleure lisibilite des echecs
 - **Jira :** B.3.2
 - **Documentation associee :** docs/04_devops/B3_2_ci_frontend_workflow.md
 - **PR/Commit (si disponible) :** a renseigner
+
+### Decision 2026-04-12 - B.3.3 / A.3.3
+
+#### Contexte
+Les workflows CI existants sont configures en `push` uniquement, alors qu'une partie de la documentation mentionnait `push + pull_request`.
+
+#### Decision retenue
+Conserver la politique **push-only avec filtres de chemins** et aligner l'ensemble de la documentation sur ce comportement reel. Versionner explicitement la source de verite branch protection dans `branch-ruleset.json`.
+
+#### Alternatives considerees
+- Migrer les workflows en `push + pull_request`.
+- Laisser des divergences docs/workflows.
+
+#### Compromis
+Politique plus simple et coherente avec l'etat actuel, au prix d'une couverture de declenchement PR non redondante.
+
+#### Impacts
+- **Court terme :** coherence immediate entre workflows, checks requis et docs.
+- **Long terme :** base claire pour eventuellement basculer vers `push + pull_request` via une future decision explicite.
+
+#### Actions de suivi
+- **Action 1 :** maintenir l'alignement des noms de checks entre workflows et `branch-ruleset.json`.
+- **Action 2 :** reevaluer la politique de trigger si le mode de contribution evolue.
+
+#### Liens
+- **Jira :** A.3.3, B.3.3
+- **Documentation associee :**
+  - docs/04_devops/DEVOPS.md
+  - docs/04_devops/A3_3_cicd_definition_of_done.md
+  - docs/04_devops/GitHub_Infrastructure_Plan.md
+- **PR/Commit (si disponible) :** a renseigner

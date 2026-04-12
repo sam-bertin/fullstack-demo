@@ -155,11 +155,24 @@ Objectif: etre autonome sur les actions quotidiennes (run, debug, tests, build) 
 - Indiquer lesquelles sont obligatoires, optionnelles, et leur valeur par defaut.
 
 ## Premier demarrage (local)
+### Parcours reproductible actuel (etat reel du repo)
 1. Cloner le repository.
-2. Configurer les variables d'environnement.
-3. Demarrer la base de donnees.
-4. Lancer backend puis frontend.
-5. Verifier l'acces a l'application et aux endpoints de sante.
+2. Frontend:
+	- `cd /home/runner/work/fullstack-demo/fullstack-demo/frontend`
+	- `npm ci`
+	- `npm run lint`
+	- `npm run test`
+	- `npm run build`
+3. Backend (necessite Java 21 localement):
+	- `cd /home/runner/work/fullstack-demo/fullstack-demo/backend/backend`
+	- `chmod +x mvnw` (Linux/macOS)
+	- `./mvnw checkstyle:check`
+	- `./mvnw test`
+	- `./mvnw -DskipTests clean package`
+4. Verifier que les deux workflows CI refleteront la meme sequence (lint -> test -> build).
+
+### Note
+- Ce quickstart couvre uniquement l'etat actuellement implemente (socles + CI), sans supposer les features auth/chat non encore livrees.
 
 ## Verification rapide
 - Backend: demarrage OK, tests OK.
@@ -236,7 +249,7 @@ Entree courante (CI backend activee):
 	- `TEST_OK`
 	- `PACKAGE_OK`
 - Action suivante:
-	- Garder `branch-ruleset.json` aligne sur ces 3 checks pour bloquer le merge si un gate est rouge.
+	- Garder `branch-ruleset.json` aligne sur les 6 checks backend+frontend pour bloquer le merge si un gate est rouge.
 
 Entree courante (validation B.2.1 - socle frontend):
 - Date: 2026-04-10
@@ -272,7 +285,6 @@ Entree courante (validation B.3.2 - CI frontend):
 	- Artefact frontend `dist/` genere.
 - Action suivante:
 	- Enchainer sur B.3.3 pour activer les checks frontend comme required status checks sur `main`.
-
 
 
 

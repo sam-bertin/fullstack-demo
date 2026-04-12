@@ -8,9 +8,9 @@
 
 ## Vue d'ensemble
 
-La **phase 1 de A.3.3** est terminée : protection de branche `main` est configurée et active.
+La protection de branche `main` est configurée, active et versionnée.
 
-Cette phase établit les **règles de base** avant que la CI soit complètement en place. La **phase 2** (workflows CI) sera implémentée lors de **B.3.1** et **B.3.2**.
+Le cycle CI backend/frontend est maintenant en place (B.3.1 + B.3.2) et ses checks requis sont activés dans `branch-ruleset.json` (B.3.3).
 
 ---
 
@@ -69,9 +69,9 @@ Branche `main` (`~DEFAULT_BRANCH`)
 
 ---
 
-## Phase 2 (déferred)
+## Checks requis actifs (B.3.3)
 
-Une fois **B.3.1** et **B.3.2** terminés, les workflows seront **requis** comme status checks :
+Les workflows backend/frontend sont maintenant **requis** comme status checks :
 
 ```json
 {
@@ -99,7 +99,7 @@ Une fois **B.3.1** et **B.3.2** terminés, les workflows seront **requis** comme
 GitHub UI → Settings → Rules → Voir `Protection de la branche Main`
 
 ### Modifier la config
-Éditeur `branch-ruleset.json` locar + push
+Editer `branch-ruleset.json` dans le repository puis ouvrir une PR.
 
 ### Contourner temporairement (si besoin)
 Impossible sans modifier la règle ou utiliser `git push --force` (qui est autorisé pour rebases)
@@ -135,9 +135,9 @@ git push origin feature/test
 
 ## Limitations actuelles
 
-1. **Aucun required status check** (workflows pas encore implémentés)
-   → Tu peux merger même si hypothétique linting/test échoueraient
-   → Sera corrigé à B.3.1/B.3.2
+1. **Politique CI push-only**
+   → Les checks sont produits sur les commits pushes, puis reutilises dans la PR.
+   → Cette politique est volontairement alignee avec les workflows actuels.
 
 2. **Reviews périmées ne sont jamais dismissées**
    → Ancienne review reste valide même après nouveau commit
@@ -154,7 +154,7 @@ git push origin feature/test
 | Étape | Jira | Statut | Description |
 |-------|------|--------|-------------|
 | Phase 1 | A.3.3 | ✅ Terminé | Protection branche (suppression, PR obligatoire, review, threads) |
-| Phase 2 | B.3.1/B.3.2 | ⏳ Pending | Workflows CI + required status checks |
+| Phase 2 | B.3.1/B.3.2/B.3.3 | ✅ Terminé | Workflows CI + required status checks |
 
 ---
 
@@ -167,13 +167,13 @@ Réalisé:
 • Protection branche main: suppression interdite, PR obligatoire, 1 review min
 • Threads résolus requis avant merge
 • Push --force autorisé (rebases)
-• Aucun status check requis pour l'instant (en attente B.3.1/B.3.2)
+• 6 status checks requis (backend + frontend)
 
 État:
 ✅ branch-ruleset.json déployé et actif
 ✅ Documenté dans docs/04_devops/GitHub_Branch_Protection_Setup.md
 
-Phase 2 (B.3.1/B.3.2):
-→ Activation required_status_checks une fois workflows créés
-→ Merge sera bloqué si lint/test/build échouent
+Phase 2 (B.3.1/B.3.2/B.3.3):
+→ Required status checks activés et versionnés dans `branch-ruleset.json`
+→ Merge bloqué si lint/test/build backend ou frontend échouent
 ```
