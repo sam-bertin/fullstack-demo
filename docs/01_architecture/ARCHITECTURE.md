@@ -5,21 +5,21 @@
 - Frontend SPA React + Backend Spring Boot + PostgreSQL.
 
 ## Couches backend
-- Controller -> Service (interface) -> ServiceImpl -> Repository.
-- Gestion erreurs via RestControllerAdvice.
+- **[Prevu]** Controller -> Service (interface) -> ServiceImpl -> Repository.
+- **[Prevu]** Gestion erreurs via RestControllerAdvice.
 
 ## Architecture frontend
-- Organisation feature-based.
-- Separation logique (hooks/services) et presentation (components).
+- **[Prevu]** Organisation feature-based.
+- **[Prevu]** Separation logique (hooks/services) et presentation (components).
 
 ## Flux principaux
-- Authentification (register/login/JWT).
-- Chat temps reel (WebSocket) + persistence.
+- **[Prevu]** Authentification (register/login/JWT).
+- **[Prevu]** Chat temps reel (WebSocket) + persistence.
 
 ## Contrats transverses
-- Format de reponse API.
-- Politique validation.
-- Codes d'erreur standardises.
+- **[Documenté, Non Implémenté]** Format de reponse API.
+- **[Documenté, Non Implémenté]** Politique validation.
+- **[Documenté, Non Implémenté]** Codes d'erreur standardises.
 
 ## Diagrammes
 - Ajouter diagrammes C4/sequence si necessaire.

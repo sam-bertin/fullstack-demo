@@ -1,27 +1,30 @@
 # Frontend
 
 ## Stack
-- React 19, TypeScript strict, Vite, Tailwind.
+- **Installe actuel**: React 19, TypeScript strict, Vite.
+- **Prevu prochainement**: Tailwind.
 
 ## Organisation
 - Features, composants, hooks, services, stores.
 
 ## Etat
-- Serveur: TanStack Query.
-- Client: Zustand (ou Context si justifie).
+- **Prevu prochainement**:
+  - Serveur: TanStack Query.
+  - Client: Zustand (ou Context si justifie).
 
 ## Flux UI
-- Authentification.
-- Navigation et routes protegees.
-- Chat temps reel.
+- Authentification (Prevu).
+- Navigation et routes protegees (Prevu).
+- Chat temps reel (Prevu).
 
 ## Validation formulaires
-- React Hook Form + Zod/Yup.
+- **Prevu prochainement**: React Hook Form + Zod/Yup.
 
 ## Client API
-- Configuration Axios.
-- Intercepteurs JWT.
-- Gestion erreurs 401/403.
+- **Prevu prochainement**:
+  - Configuration Axios.
+  - Intercepteurs JWT.
+  - Gestion erreurs 401/403.
 
 ## Tests
 - Vitest actif avec test smoke pour la CI.
