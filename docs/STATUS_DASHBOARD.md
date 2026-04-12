@@ -7,13 +7,13 @@
 | A.2.1 | Conventions DTO | Planned | `docs/02_backend/A2_1_dto_request_response_conventions.md` |
 | A.2.2 | Politique validation | Planned | `docs/02_backend/A2_2_validation_policy.md` |
 | A.3.1 | DoD backend | Implemented (doc) | `docs/02_backend/A3_1_backend_definition_of_done.md` |
-| A.3.2 | DoD frontend | Implemented (doc, bootstrap criteria tightened) | `docs/03_frontend/A3_2_frontend_definition_of_done.md` |
+| A.3.2 | DoD frontend | Implemented (doc) | `docs/03_frontend/A3_2_frontend_definition_of_done.md` |
 | A.3.3 | DoD CI/CD | Implemented | `docs/04_devops/A3_3_cicd_definition_of_done.md` |
 | B.1.1 | Initialisation Spring Boot | Implemented | `backend/backend/pom.xml`, `backend/backend/src/main/java/com/livechat/backend/BackendApplication.java` |
-| B.1.3 | Architecture en couches (squelette) | Implemented (skeleton) | `backend/backend/src/main/java/com/livechat/backend/*/package-info.java` |
+| B.1.3 | Architecture en couches (squelette) | Planned | `docs/02_backend/BACKEND.md` |
 | B.2.1 | React + Vite + TS strict | Implemented | `frontend/package.json`, `frontend/tsconfig.app.json` |
 | B.2.2 | Dependances coeur frontend | Planned clarified | `docs/03_frontend/FRONTEND.md` |
-| B.2.3 | Structure feature-based frontend | Implemented (baseline) | `frontend/src/features/*`, `frontend/src/shared/*` |
+| B.2.3 | Structure feature-based frontend | Planned | `docs/03_frontend/FRONTEND.md` |
 | B.3.1 | CI backend | Implemented | `.github/workflows/ci-backend.yml` |
 | B.3.2 | CI frontend | Implemented | `.github/workflows/ci-frontend.yml` |
 | B.3.3 | Merge quality gate | Implemented | `branch-ruleset.json` |

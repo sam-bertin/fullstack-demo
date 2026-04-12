@@ -7,15 +7,17 @@
 - **Implemented**
   - Socle Spring Boot initial.
   - CI backend lint/test/build.
-  - Dependance WebSocket ajoutee (`spring-boot-starter-websocket`).
   - Convention package canonique retenue: `com.livechat.backend...`.
 - **Planned**
+  - Dependance WebSocket (`spring-boot-starter-websocket`).
+  - Squelette complet d'architecture en couches (`controller`, `service`, `serviceimpl`, `repository`, `dto`, `config`, `exception`).
   - Endpoints metier auth/chat.
   - Contrat API complet et gestion d'erreurs runtime.
   - Validation metier sur DTO request.
 
 ## Modules
-- **Implemented (squelette B.1.3)**:
+- **Implemented**: package racine `com.livechat.backend`.
+- **Planned**:
   - `com.livechat.backend.controller`
   - `com.livechat.backend.service`
   - `com.livechat.backend.serviceimpl`
@@ -23,7 +25,7 @@
   - `com.livechat.backend.dto`
   - `com.livechat.backend.config`
   - `com.livechat.backend.exception`
-- **Planned**: implémenter les classes metier dans ces packages.
+  - puis implementation des classes metier dans ces packages.
 
 ## Endpoints REST
 - **Implemented**: aucun endpoint metier publie.

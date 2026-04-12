@@ -13,7 +13,7 @@ Priorités : Sécurité (Zero Trust local), maintenabilité (Clean Code, SOLID),
 - Gestion des erreurs : Utiliser un `@RestControllerAdvice` global. Les contrôleurs ne doivent retourner que des objets DTO enveloppés dans un format standardisé (ex: `ApiResponse<T>`). Ne jamais exposer les entités JPA directement.
 
 ### Naming Conventions
-- Packages : Minuscules, format `com.company.project.module`.
+- Packages : Minuscules, format canonique `com.livechat.backend.<module>`.
 - Classes/Interfaces : `PascalCase` (ex: `UserProfileService`).
 - Méthodes/Variables : `camelCase` (ex: `getUserById`).
 - Constantes : `UPPER_SNAKE_CASE` (ex: `MAX_RETRY_COUNT`).
