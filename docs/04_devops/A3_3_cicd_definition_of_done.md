@@ -22,7 +22,7 @@
 - Frontend: `push` uniquement (filtres frontend + workflow).
 
 ### Branch protection versionnee
-- Fichier: `/home/runner/work/fullstack-demo/fullstack-demo/branch-ruleset.json`
+- Fichier: `branch-ruleset.json`
 - Checks requis:
   - `CI Backend / Lint (Checkstyle)`
   - `CI Backend / Unit Tests (JUnit 5)`
@@ -56,10 +56,10 @@
 - Moins d'ecarts entre politique documentee et comportement reel.
 
 ## 7) References
-- `/home/runner/work/fullstack-demo/fullstack-demo/.github/workflows/ci-backend.yml`
-- `/home/runner/work/fullstack-demo/fullstack-demo/.github/workflows/ci-frontend.yml`
-- `/home/runner/work/fullstack-demo/fullstack-demo/branch-ruleset.json`
-- `/home/runner/work/fullstack-demo/fullstack-demo/docs/04_devops/DEVOPS.md`
+- `.github/workflows/ci-backend.yml`
+- `.github/workflows/ci-frontend.yml`
+- `branch-ruleset.json`
+- `docs/04_devops/DEVOPS.md`
 
 ## 8) Texte Jira pret a coller
 `A.3.3 aligne: workflows backend/frontend et documentation sont maintenant coherents sur une politique push-only. La protection de branche est versionnee dans branch-ruleset.json avec 6 checks requis aligns aux jobs CI.`

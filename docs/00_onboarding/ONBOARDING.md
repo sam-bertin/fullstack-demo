@@ -158,13 +158,13 @@ Objectif: etre autonome sur les actions quotidiennes (run, debug, tests, build) 
 ### Parcours reproductible actuel (etat reel du repo)
 1. Cloner le repository.
 2. Frontend:
-	- `cd /home/runner/work/fullstack-demo/fullstack-demo/frontend`
+	- `cd frontend`
 	- `npm ci`
 	- `npm run lint`
 	- `npm run test`
 	- `npm run build`
 3. Backend (necessite Java 21 localement):
-	- `cd /home/runner/work/fullstack-demo/fullstack-demo/backend/backend`
+	- `cd backend/backend`
 	- `chmod +x mvnw` (Linux/macOS)
 	- `./mvnw checkstyle:check`
 	- `./mvnw test`
@@ -285,6 +285,5 @@ Entree courante (validation B.3.2 - CI frontend):
 	- Artefact frontend `dist/` genere.
 - Action suivante:
 	- Enchainer sur B.3.3 pour activer les checks frontend comme required status checks sur `main`.
-
 
 

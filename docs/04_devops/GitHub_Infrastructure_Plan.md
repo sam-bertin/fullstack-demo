@@ -7,11 +7,11 @@
 ## Politique CI appliquee
 - Politique retenue: **push-only** avec filtres de chemins.
 - Workflows actifs:
-  - `/home/runner/work/fullstack-demo/fullstack-demo/.github/workflows/ci-backend.yml`
-  - `/home/runner/work/fullstack-demo/fullstack-demo/.github/workflows/ci-frontend.yml`
+  - `.github/workflows/ci-backend.yml`
+  - `.github/workflows/ci-frontend.yml`
 
 ## Source de verite branch protection
-- Fichier versionne: `/home/runner/work/fullstack-demo/fullstack-demo/branch-ruleset.json`
+- Fichier versionne: `branch-ruleset.json`
 - Required status checks:
   - `CI Backend / Lint (Checkstyle)`
   - `CI Backend / Unit Tests (JUnit 5)`
@@ -27,13 +27,13 @@
 
 ## Verification locale recommandee
 ### Backend
-- `cd /home/runner/work/fullstack-demo/fullstack-demo/backend/backend`
+- `cd backend/backend`
 - `./mvnw checkstyle:check`
 - `./mvnw test`
 - `./mvnw -DskipTests clean package`
 
 ### Frontend
-- `cd /home/runner/work/fullstack-demo/fullstack-demo/frontend`
+- `cd frontend`
 - `npm ci`
 - `npm run lint`
 - `npm run test`

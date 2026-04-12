@@ -69,8 +69,8 @@ DoD frontend composee des blocs suivants:
 - Session coherente sur navigation/refresh.
 
 6. **Tests**
-- **Phase bootstrap (etat actuel)**: smoke baseline obligatoire (Vitest vert).
-- **Phase features (prochaine etape)**: tests composants/hooks mis a jour avec au moins un cas nominal et un cas d'erreur UI.
+- **Phase bootstrap (état actuel)**: smoke baseline obligatoire (Vitest vert).
+- **Phase features (prochaine étape)**: tests composants/hooks mis a jour avec au moins un cas nominal et un cas d'erreur UI.
 
 7. **Qualite statique**
 - Lint frontend vert.
