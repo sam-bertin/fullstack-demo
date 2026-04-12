@@ -11,7 +11,7 @@
 
 ## Architecture frontend
 - **Implemented** (B.2.3): structure feature-based initiale:
-  - `features/auth`, `features/chat`, `shared/lib`, `shared/ui`.
+  - `frontend/src/features/auth`, `frontend/src/features/chat`, `frontend/src/shared/lib`, `frontend/src/shared/ui`.
 - **Planned** (B.2.2, C.2.*, D.2.*): etat global, client API JWT, formulaires, routes protegees, UX chat.
 
 ## CI/CD et gouvernance qualite

@@ -40,4 +40,4 @@
 - `npm run build`
 
 ## Texte Jira pret a coller
-`B.3.1/B.3.2/B.3.3 alignes: workflows backend/frontend actifs en push-only, checks lint/test/build confirms, et branch-ruleset.json versionne comme source de verite pour les checks requis de merge.`
+`B.3.1/B.3.2/B.3.3 alignes: workflows backend/frontend actifs en push-only, checks lint/test/build confirmés, et branch-ruleset.json versionne comme source de verite pour les checks requis de merge.`

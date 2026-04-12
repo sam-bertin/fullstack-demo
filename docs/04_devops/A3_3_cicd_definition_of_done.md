@@ -7,7 +7,7 @@
 
 ## 2) Decision appliquee
 - Politique CI retenue et appliquee: **push-only** avec filtres de chemins.
-- Les workflows reels (`ci-backend.yml`, `ci-frontend.yml`) et la documentation sont alignes sur cette politique.
+- Les workflows reels (`ci-backend.yml`, `ci-frontend.yml`) et la documentation sont alignés sur cette politique.
 - La source de verite de la protection de branche est versionnee dans le repository via `branch-ruleset.json`.
 
 ## 3) Implementation en place
@@ -62,4 +62,4 @@
 - `docs/04_devops/DEVOPS.md`
 
 ## 8) Texte Jira pret a coller
-`A.3.3 aligne: workflows backend/frontend et documentation sont maintenant coherents sur une politique push-only. La protection de branche est versionnee dans branch-ruleset.json avec 6 checks requis aligns aux jobs CI.`
+`A.3.3 aligne: workflows backend/frontend et documentation sont maintenant coherents sur une politique push-only. La protection de branche est versionnee dans branch-ruleset.json avec 6 checks requis alignés aux jobs CI.`
