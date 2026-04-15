@@ -155,6 +155,7 @@ Objectif: etre autonome sur les actions quotidiennes (run, debug, tests, build) 
 	- `DB_URL` (optionnelle en local) - defaut: `jdbc:postgresql://localhost:5432/livechat`
 	- `DB_USER` (optionnelle en local) - defaut: `livechat`
 	- `DB_PASSWORD` (optionnelle en local) - defaut: `livechat`
+	- `APP_CORS_ALLOWED_ORIGINS` (optionnelle en local) - defaut: `http://localhost:5173`
 - Note: en environnement partage/prod, ces valeurs doivent etre injectees via secrets CI/CD et ne jamais etre committees.
 
 ## Premier demarrage (local)
@@ -176,7 +177,7 @@ Objectif: etre autonome sur les actions quotidiennes (run, debug, tests, build) 
 ## Verification rapide
 - Backend: demarrage OK, tests OK.
 - Frontend: build OK, page chargee.
-- End-to-end minimal: login puis acces ecran protege.
+- End-to-end minimal: register puis login sur les endpoints `/api/v1/auth/*`.
 
 ## Depannage rapide
 - Ports occupes.

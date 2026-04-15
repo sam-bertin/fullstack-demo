@@ -343,3 +343,69 @@ Les tests integration sont un peu plus lents car ils lancent un conteneur, mais 
 - **Jira :** B.1.2
 - **Documentation associee :** docs/02_backend/B1_2_postgresql_profiles_flyway_testcontainers.md
 - **PR/Commit (si disponible) :** a renseigner
+
+### Decision 2026-04-15 - B.1.3 + C.1.1/C.1.2/C.1.3 + C.2.1
+
+#### Contexte
+Le besoin etait de maximiser maintenabilite/testabilite du socle avant d'ajouter JWT, tout en disposant d'une fonctionnalite minimale pour valider l'integration MVP.
+
+#### Decision retenue
+Implementer une architecture backend en couches minimale et reutilisable, avec flux auth register/login fonctionnel sans JWT pour ce sprint:
+- mot de passe hashé BCrypt,
+- endpoints auth publics,
+- reponses standardisees + gestion d'erreur globale,
+- UI frontend minimale pour tester register/login.
+
+#### Alternatives considerees
+- Integrer JWT complet dans le meme sprint.
+- Reporter toute auth apres architecture complete.
+- Faire un prototype auth monolithique sans couches.
+
+#### Compromis
+Securite stateless incomplete a court terme (pas de token), mais dette reduite cote architecture, meilleure testabilite, et integration plus fiable.
+
+#### Impacts
+- **Court terme :** register/login utilisables pour valider le socle; CI locale backend/frontend verte.
+- **Long terme :** base propre pour introduire JWT en sprint suivant sans refonte structurelle majeure.
+
+#### Actions de suivi
+- **Action 1 :** implementer C.1.4 (JWT + endpoints proteges stateless).
+- **Action 2 :** etendre frontend auth avec etat global + intercepteur JWT (C.2.2/C.2.3).
+- **Action 3 :** finaliser B.3.3 pour checks requis frontend en merge gate.
+
+#### Liens
+- **Jira :** B.1.3, C.1.1, C.1.2, C.1.3, C.2.1
+- **Documentation associee :** docs/02_backend/B1_3_C1_auth_foundation_without_jwt.md ; docs/03_frontend/C2_1_auth_forms_minimal.md
+- **PR/Commit (si disponible) :** a renseigner
+
+### Decision 2026-04-15 - Review Hardening (C.2.1 + C.1.2/A.1.2)
+
+#### Contexte
+Une revue technique a identifié des risques concrets avant toute évolution: sémantique ARIA incomplète sur le switch auth, manque d'observabilité sur exceptions inattendues, et conflit username non géré explicitement en register.
+
+#### Decision retenue
+Appliquer un hardening ciblé sans changer le périmètre fonctionnel:
+- **Frontend (Option A validée):** implémenter un pattern tabs WAI-ARIA complet (`tablist`/`tab`/`tabpanel`) avec navigation clavier `ArrowLeft/ArrowRight/Home/End`.
+- **Backend:** ajouter logging serveur sur exceptions inattendues et mapper `DataIntegrityViolationException` en `409 RESOURCE_CONFLICT`.
+- **Register:** vérifier explicitement l'unicité `username` avant persistance et renvoyer un conflit métier (`409`).
+- **Qualité:** ajouter tests unitaires/intégration backend et tests frontend composant pour sécuriser ces comportements.
+
+#### Alternatives considerees
+- Retirer `role="tablist"` et revenir à des boutons simples (rejeté car UX tabs conservée et accessible attendue).
+- Ne gérer que le catch `DataIntegrityViolationException` sans check applicatif (rejeté: UX moins claire et diagnostics plus tardifs).
+
+#### Compromis
+L'implémentation ajoute un peu de code d'infrastructure (clavier/focus ARIA et handlers d'erreur), mais réduit fortement le risque de régression accessibilité et les 500 opaques.
+
+#### Impacts
+- **Court terme :** feedback utilisateur plus précis en cas de username dupliqué, diagnostics serveur améliorés, accessibilité du switch auth conforme.
+- **Long terme :** base plus robuste pour introduire JWT et routes protégées sans dette sur ces fondations.
+
+#### Actions de suivi
+- **Action 1 :** finaliser C.1.3 JWT puis C.1.4 sur la base des nouveaux mappings d'erreur.
+- **Action 2 :** étendre les tests frontend auth au parcours complet (soumission + messages d'erreur API).
+
+#### Liens
+- **Jira :** C.2.1, C.1.2, A.1.2
+- **Documentation associee :** docs/03_frontend/C2_1_auth_forms_minimal.md ; docs/02_backend/B1_3_C1_auth_foundation_without_jwt.md ; docs/STATUS.md
+- **PR/Commit (si disponible) :** a renseigner
