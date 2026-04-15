@@ -20,16 +20,25 @@ Ce document centralise l'etat actuel d'avancement des taches par rapport au plan
 |---|---|---|---|---|---|
 | B.1.1 | Backend | Initialisation Spring Boot | ✅ Bootstrapped | Oui | Documente |
 | B.1.2 | Backend | Config PostgreSQL & profils | ✅ Termine | Oui | Documente |
-| B.1.3 | Backend | Architecture en couches | 📝 Prevu | Non | A documenter |
+| B.1.3 | Backend | Architecture en couches | ✅ Termine | Oui | Documente |
 | B.2.1 | Frontend | React Vite TS Strict (React 19) | ✅ Bootstrapped | Oui | Documente |
-| B.2.2 | Frontend | Dependances coeur | 📝 Prevu | Non | A documenter |
+| B.2.2 | Frontend | Dependances coeur | 🚧 Partiel | Partiel | A completer |
 | B.2.3 | Frontend | Structure features | 📝 Prevu | Non | A documenter |
 | B.3.1 | CI/CD | CI Backend | ✅ Bootstrapped | Oui (Push only) | Documente |
 | B.3.2 | CI/CD | CI Frontend | ✅ Bootstrapped | Oui (Push only) | Documente |
 | B.3.3 | CI/CD | Gate de qualite merge | 📝 Prevu | Non (Attente required status checks) | A documenter |
 
-## MVC Authentification (EPIC C) - *A venir*
-- Non demarre
+## MVC Authentification (EPIC C)
+
+| Cle Jira | Composant | Description | Statut | Implementation Code | Documentation |
+|---|---|---|---|---|---|
+| C.1.1 | Backend | Creer le modele User | ✅ Termine | Oui | Incluse sprint |
+| C.1.2 | Backend | Implementer register | ✅ Termine | Oui | Incluse sprint |
+| C.1.3 | Backend | Implementer login et generation JWT | 🚧 Partiel | Login oui / JWT non | Incluse sprint |
+| C.1.4 | Backend | Securiser les endpoints REST | 📝 Prevu | Non (JWT reporte) | A documenter |
+| C.2.1 | Frontend | Creer formulaires login/register | ✅ Termine | Oui | Documente |
+| C.2.2 | Frontend | Gerer l'etat auth | 📝 Prevu | Non | A documenter |
+| C.2.3 | Frontend | Configurer client API avec intercepteur JWT | 🚧 Partiel | Client API minimal sans JWT | A completer |
 
 ## MVP Chat (EPIC D) - *A venir*
 - Non demarre

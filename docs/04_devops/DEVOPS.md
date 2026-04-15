@@ -62,6 +62,14 @@
 - `.\mvnw.cmd -DskipTests spring-boot:run`
 - Attendu: migration Flyway appliquee, datasource PostgreSQL connectee, backend demarre.
 
+### Commandes minimales de verification sprint auth sans JWT
+- `cd backend/backend`
+- `.\mvnw.cmd test`
+- Attendu: `AuthServiceImplTest` et `AuthControllerIntegrationTest` passent sur PostgreSQL Testcontainers.
+- `cd frontend`
+- `npm run lint && npm run test && npm run build`
+- Attendu: UI auth minimale compile et tests/lint restent verts.
+
 ### Commandes minimales de verification CI frontend
 - `cd frontend`
 - `npm ci`
