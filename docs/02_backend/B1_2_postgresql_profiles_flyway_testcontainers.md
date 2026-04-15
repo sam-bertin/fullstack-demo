@@ -83,7 +83,8 @@ Cette combinaison est la plus simple pour rendre l environnement reproductible r
 ### Changement par fichier
 - `backend/backend/pom.xml`
   - Ajout de `flyway-core` et `flyway-database-postgresql`.
-  - Ajout de Testcontainers (`junit-jupiter`, `postgresql`).
+  - Ajout d un BOM Testcontainers (`testcontainers-bom:2.0.4`) dans `dependencyManagement`.
+  - Ajout de Testcontainers (`testcontainers-junit-jupiter`, `testcontainers-postgresql`) sans versions explicites.
   - Suppression de la dependance H2 pour aligner les tests integration sur PostgreSQL.
 - `backend/backend/src/main/resources/application.properties`
   - Ajout de `spring.profiles.default=dev`.
