@@ -187,84 +187,56 @@ Ce niveau est suffisant pour un MVP robuste et pose les bases d'une qualite cont
 - **Documentation associee :** docs/05_decisions/DECISIONS_LOG.md et docs/04_devops/A3_3_cicd_definition_of_done.md.
 - **Point d'attention pour le prochain ticket :** verifier techniquement les branch protections et l'execution reelle des checks requis sur PR.
 
-## 17) Implémentation technique réalisée (Phase 1)
+## 17) Implementation technique realisee (etat mis a jour)
 
-### État actuel
+### Etat actuel
 
-**A.3.3 est fractionné en 2 phases** :
+La DoD CI/CD A.3.3 est en place de facon incrementale:
 
-#### Phase 1 : Protection de branche ✅ IMPLÉMENTÉE
+#### Phase 1 : Protection de branche ✅ IMPLEMANTEE
 - **Fichier** : `branch-ruleset.json`
 - **Configuration** :
-  - ❌ Suppression `main` interdite
-  - ✅ Push --force autorisé (rebases)
-  - ✅ PR obligatoire
-  - ✅ 1 approbateur minimum (self-review)
-  - ✅ Threads résolus obligatoire
-  - ❌ Aucun required status check pour l'instant
+  - Suppression de `main` interdite
+  - PR obligatoire
+  - 1 approbateur minimum (self-review possible)
+  - Resolution des threads obligatoire
+  - Required status checks backend actifs
 
 **Documentation** : `docs/04_devops/GitHub_Branch_Protection_Setup.md`
 
-#### Phase 2 : Workflows CI + Status Checks (DÉFERRED)
-- **Dépend de** : B.3.1 (workflow backend), B.3.2 (workflow frontend)
-- **À créer** :
-  - `.github/workflows/ci-backend.yml` : Lint (CheckStyle) → Test (JUnit) → Build (Maven)
-  - `.github/workflows/ci-frontend.yml` : Lint (ESLint) → Test (Vitest) → Build (Vite)
-- **À activer dans branch-ruleset.json** :
-  - 6 required status checks (backend: lint/test/build, frontend: lint/test/build)
-  - Merge bloqué si l'un des 6 est ❌
+#### Phase 2 : Workflows CI + status checks 🚧 PARTIELLEMENT IMPLEMENTEE
+- **Workflows actifs** :
+  - `.github/workflows/ci-backend.yml` (push + pull_request)
+  - `.github/workflows/ci-frontend.yml` (push + pull_request)
+  - `.github/workflows/ci-qa.yml` (API smoke Bruno + E2E Playwright)
+- **Required status checks actifs dans branch-ruleset** : backend uniquement
+- **Restant a faire** : activer checks frontend et QA en required status checks pour blocage merge complet.
 
-**Plan détaillé** : `docs/04_devops/GitHub_Infrastructure_Plan.md`
-
----
-
-### Justification du fractionnement
-
-| Phase | Pourquoi | Quand |
-|-------|---------|-------|
-| **1** | Protéger `main` et forcer PR en attendant CI | NOW (A.3.3 Phase 1) |
-| **2** | Forcer lint/tests/build autom. | Backend: actif / Frontend: B.3.2 |
-
-Sans Phase 1, tu risques de casser `main` accidentellement. Sans Phase 2, tu acceptes la responsabilité perso d'exécuter lint/tests avant merge. Le backend est maintenant branché sur cette logique via `ci-backend.yml`.
+**Documentation detaillee** : `docs/04_devops/B3_3_api_bruno_playwright_quality_gates.md`
 
 ---
 
-### Vérifications effectuées
+### Verifications effectuees
 
-- ✅ `branch-ruleset.json` valide (JSON + paramètres corrects)
-- ✅ Protection de branche testable localement (commit direct → reject)
-- ✅ Self-review workflow possible (1 approbateur = toi-même)
-- ✅ Threads resolution enforcement en place
-- ✅ CI backend implémentée: lint Checkstyle, tests JUnit 5, build Maven
-- ✅ CI backend déclenchée au push uniquement
-- ✅ CI backend sur runner natif avec `./mvnw`
-- ✅ Cache Maven géré par `actions/setup-java@v4` avec `cache: 'maven'`
-- ✅ Checks requis alignés avec `ci-backend.yml`
+- `branch-ruleset.json` valide (JSON + regles PR/checks backend)
+- CI backend active (lint/test/build)
+- CI frontend active (lint/test/build)
+- CI QA active (Bruno + Playwright)
+- Reproduction locale documentee dans `docs/04_devops/DEVOPS.md` et `docs/00_onboarding/ONBOARDING.md`
 
 ---
 
-### Étapes de validation finales
+### Etat de la DoD CI/CD
 
-**Avant de passer à B.1.1** :
-1. ✅ Créer une branche test : `git checkout -b test/protection`
-2. ✅ Pousser sur cette branche : `git push origin test/protection`
-3. ✅ Créer PR vers `main` via GitHub UI
-4. ✅ Self-approuver la PR
-5. ✅ Vérifier que merge est autorisé si les checks backend sont verts et les threads résolus
-6. ✅ Merger et nettoyer `test/protection`
-
----
-
-### État de la DoD CI/CD
-
-| Critère | Phase | Statut |
+| Critere | Phase | Statut |
 |---------|-------|--------|
-| Pipelines backend/frontend automatiques | 2 | ✅ Backend actif (push only, runner natif) / ⏳ Frontend déferred |
-| Gates lint/tests/build | 2 | ✅ Backend actif / ⏳ Frontend déferred |
-| Blocage merge si echec | 2 | ✅ Backend actif via checks requis |
-| Reproductibilité locale documentée | 2 | ✅ Backend documenté + wrapper Maven + cache natif / ⏳ Frontend planifié |
-| **Protection branche** | **1** | **✅ Implémenté** |
-| **PR obligatoire** | **1** | **✅ Implémenté** |
-| **Self-review minimum** | **1** | **✅ Implémenté** |
+| Pipelines backend/frontend automatiques | 2 | ✅ Backend + Frontend actifs |
+| Gate QA API/E2E | 2 | ✅ Workflow QA actif |
+| Gates lint/tests/build | 2 | ✅ Backend + Frontend actifs |
+| Blocage merge si echec | 2 | 🚧 Backend actif ; frontend/QA a activer en required checks |
+| Reproductibilite locale documentee | 2 | ✅ Documentee (backend/frontend/qa) |
+| **Protection branche** | **1** | **✅ Implemente** |
+| **PR obligatoire** | **1** | **✅ Implemente** |
+| **Self-review minimum** | **1** | **✅ Implemente** |
 
-**Conclusion** : A.3.3 Phase 1 est complète et la CI backend de la Phase 2 est en place en mode push-only sur runner natif, avec wrapper Maven du depot et cache géré par `setup-java`. Le volet frontend reste à implémenter lors de B.3.2.
+**Conclusion** : A.3.3 est partiellement complete au niveau merge gate global. Les pipelines et tests sont en place ; la derniere etape est l'activation frontend/QA en required status checks sur `main`.

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+
+    <!-- Keep Testcontainers lifecycle logs but mute noisy provider probing stack traces. -->
+    <logger name="org.testcontainers.dockerclient.DockerClientProviderStrategy" level="ERROR" />
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+    </root>
+</configuration>

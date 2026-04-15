@@ -32,7 +32,8 @@
 
 ## Tests
 - Vitest actif avec test smoke pour la CI.
-- Strategie a etendre sur composants/hooks critiques.
+- Playwright actif pour E2E auth (register/login + erreur credentials).
+- Strategie a etendre sur composants/hooks critiques et parcours JWT.
 
 ## Trace Jira
 - Ticket(s): B.2.1 initialise (socle React + Vite + TypeScript strict).

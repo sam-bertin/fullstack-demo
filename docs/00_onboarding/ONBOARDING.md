@@ -178,15 +178,17 @@ Objectif: etre autonome sur les actions quotidiennes (run, debug, tests, build) 
 - Backend: demarrage OK, tests OK.
 - Frontend: build OK, page chargee.
 - End-to-end minimal: register puis login sur les endpoints `/api/v1/auth/*`.
+- API smoke partage: `cd api-tests` puis `npx @usebruno/cli run ./auth --env local`.
+- E2E frontend: `cd frontend` puis `npm run e2e` (avec backend + PostgreSQL demarres).
 
 ## Depannage rapide
 - Ports occupes.
 - Erreurs de connexion DB.
 - Erreurs de CORS.
-- Erreurs de token JWT.
+- Erreurs auth/JWT (JWT complet a venir avec C.1.4).
 
 ## Trace Jira
-- Ticket(s): a renseigner pour chaque mise a jour.
+- Ticket(s): B.1.1, B.1.2, B.3.1, B.3.2, B.3.3 (mettre a jour a chaque nouvelle entree).
 
 ## Journal d'installation et verifications
 - Regle: chaque changement d'outillage doit etre trace ici au fil de l'eau.
@@ -284,7 +286,7 @@ Entree courante (validation B.3.2 - CI frontend):
 	- `BUILD_OK`
 	- Artefact frontend `dist/` genere.
 - Action suivante:
-	- Enchainer sur B.3.3 pour activer les checks frontend comme required status checks sur `main`.
+	- B.3.3 lance: workflows PR + QA en place, activation des required checks frontend/QA reste a finaliser dans les settings GitHub.
 
 Entree courante (validation B.1.2 - strategie data backend):
 - Date: 2026-04-15
@@ -303,6 +305,25 @@ Entree courante (validation B.1.2 - strategie data backend):
 	- Backend demarre avec profile `dev` sur PostgreSQL local et migration Flyway appliquee.
 - Action suivante:
 	- Demarrer B.1.3 (architecture en couches) en reutilisant ce socle de persistence.
+
+Entree courante (validation B.3.3 - API smoke partage + E2E):
+- Date: 2026-04-15
+- Cle Jira: B.3.3
+- Contexte: ajout de tests API partages Bruno, E2E Playwright et workflow CI QA dedie.
+- Commandes executees:
+	- `cd api-tests`
+	- `npx @usebruno/cli run ./auth --env local`
+	- `cd frontend`
+	- `npm run lint`
+	- `npm run test`
+	- `npm run build`
+	- `npm run e2e`
+- Resultat observe:
+	- Bruno: PASS (4 requetes, 9 tests)
+	- Frontend lint/test/build: PASS
+	- Playwright E2E: PASS (2 scenarios)
+- Action suivante:
+	- Activer les checks frontend et QA comme required status checks sur `main`.
 
 
 

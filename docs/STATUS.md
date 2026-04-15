@@ -24,9 +24,9 @@ Ce document centralise l'etat actuel d'avancement des taches par rapport au plan
 | B.2.1 | Frontend | React Vite TS Strict (React 19) | ✅ Bootstrapped | Oui | Documente |
 | B.2.2 | Frontend | Dependances coeur | 🚧 Partiel | Partiel | A completer |
 | B.2.3 | Frontend | Structure features | 📝 Prevu | Non | A documenter |
-| B.3.1 | CI/CD | CI Backend | ✅ Bootstrapped | Oui (Push only) | Documente |
-| B.3.2 | CI/CD | CI Frontend | ✅ Bootstrapped | Oui (Push only) | Documente |
-| B.3.3 | CI/CD | Gate de qualite merge | 📝 Prevu | Non (Attente required status checks) | A documenter |
+| B.3.1 | CI/CD | CI Backend | ✅ Termine | Oui (Push + Pull Request) | Documente |
+| B.3.2 | CI/CD | CI Frontend | ✅ Termine | Oui (Push + Pull Request) | Documente |
+| B.3.3 | CI/CD | Gate de qualite merge | 🚧 Partiel | Oui (workflow QA + tests Bruno/Playwright) / Required checks frontend+QA en attente | Documente |
 
 ## MVC Authentification (EPIC C)
 
@@ -47,6 +47,7 @@ Ce document centralise l'etat actuel d'avancement des taches par rapport au plan
 	- Logging serveur ajoute sur exceptions inattendues et mapping `DataIntegrityViolationException` vers `409 RESOURCE_CONFLICT`.
 	- Verification explicite de l unicite username en register + tests unitaires/integration associes.
 	- Passe warning cleanup: metadata Spring pour `app.cors.allowed-origins`, migration Testcontainers anti-deprecation, et correction des warnings JSX labels/inputs.
+	- Option 1 appliquee: reduction du bruit runtime des tests backend via configuration Surefire Mockito (agent pre-attache) et logging test cible sur Testcontainers.
 
 ## MVP Chat (EPIC D) - *A venir*
 - Non demarre
