@@ -61,6 +61,7 @@ Prépare l'extensibilité sans retarder excessivement le sprint.
 
 ### Fichiers modifies
 - `frontend/package.json`
+- `frontend/vite.config.ts`
 - `frontend/src/App.tsx`
 - `frontend/src/App.css`
 - `frontend/src/index.css`
@@ -69,11 +70,15 @@ Prépare l'extensibilité sans retarder excessivement le sprint.
 - `frontend/src/features/auth/schemas/authSchemas.ts`
 - `frontend/src/features/auth/hooks/useAuthApi.ts`
 - `frontend/src/features/auth/components/AuthPage.tsx`
+- `frontend/src/features/auth/components/AuthPage.test.tsx`
+- `frontend/src/test/setup.ts`
 
 ### Changement par fichier
 - Ajout d'un client API Axios centralisé et des contrats TS alignés backend.
 - Ajout des schémas Zod + formulaires React Hook Form pour register/login.
 - Remplacement de la page Vite par une UI auth minimale orientée test du socle.
+- Hardening accessibilite applique (Option A): pattern tabs WAI-ARIA complet (`tablist` + `tab` + `tabpanel`) et navigation clavier (`ArrowLeft/ArrowRight/Home/End`).
+- Ajout d'une suite de tests frontend pour couvrir la semantique ARIA et le comportement clavier.
 
 ### Contrats impactes
 - **API :** `/api/v1/auth/register`, `/api/v1/auth/login`.
@@ -83,13 +88,20 @@ Prépare l'extensibilité sans retarder excessivement le sprint.
 ## 10) Tests et validation
 
 ### Tests
-- **Unitaires :** a compléter.
+- **Unitaires :** tests composants auth (ARIA + clavier) ajoutes.
 - **Integration/E2E :** vérification manuelle du parcours.
 
 ### Resultats
 - `npm run lint`: OK
 - `npm run test`: OK
 - `npm run build`: OK
+
+### Mise a jour review 2026-04-15
+- Commentaire review resolu: le `tablist` expose maintenant une semantique complete et non trompeuse pour les technologies d assistance.
+
+### Mise a jour warning cleanup 2026-04-15
+- Association explicite `label htmlFor` -> `input id` sur chaque champ login/register.
+- Suppression des warnings IDE "Ambiguous spacing before next element input" sans changer le comportement fonctionnel des formulaires.
 
 ### Verification manuelle
 - La page expose bien les deux modes register/login.

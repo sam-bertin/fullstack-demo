@@ -377,3 +377,35 @@ Securite stateless incomplete a court terme (pas de token), mais dette reduite c
 - **Jira :** B.1.3, C.1.1, C.1.2, C.1.3, C.2.1
 - **Documentation associee :** docs/02_backend/B1_3_C1_auth_foundation_without_jwt.md ; docs/03_frontend/C2_1_auth_forms_minimal.md
 - **PR/Commit (si disponible) :** a renseigner
+
+### Decision 2026-04-15 - Review Hardening (C.2.1 + C.1.2/A.1.2)
+
+#### Contexte
+Une revue technique a identifié des risques concrets avant toute évolution: sémantique ARIA incomplète sur le switch auth, manque d'observabilité sur exceptions inattendues, et conflit username non géré explicitement en register.
+
+#### Decision retenue
+Appliquer un hardening ciblé sans changer le périmètre fonctionnel:
+- **Frontend (Option A validée):** implémenter un pattern tabs WAI-ARIA complet (`tablist`/`tab`/`tabpanel`) avec navigation clavier `ArrowLeft/ArrowRight/Home/End`.
+- **Backend:** ajouter logging serveur sur exceptions inattendues et mapper `DataIntegrityViolationException` en `409 RESOURCE_CONFLICT`.
+- **Register:** vérifier explicitement l'unicité `username` avant persistance et renvoyer un conflit métier (`409`).
+- **Qualité:** ajouter tests unitaires/intégration backend et tests frontend composant pour sécuriser ces comportements.
+
+#### Alternatives considerees
+- Retirer `role="tablist"` et revenir à des boutons simples (rejeté car UX tabs conservée et accessible attendue).
+- Ne gérer que le catch `DataIntegrityViolationException` sans check applicatif (rejeté: UX moins claire et diagnostics plus tardifs).
+
+#### Compromis
+L'implémentation ajoute un peu de code d'infrastructure (clavier/focus ARIA et handlers d'erreur), mais réduit fortement le risque de régression accessibilité et les 500 opaques.
+
+#### Impacts
+- **Court terme :** feedback utilisateur plus précis en cas de username dupliqué, diagnostics serveur améliorés, accessibilité du switch auth conforme.
+- **Long terme :** base plus robuste pour introduire JWT et routes protégées sans dette sur ces fondations.
+
+#### Actions de suivi
+- **Action 1 :** finaliser C.1.3 JWT puis C.1.4 sur la base des nouveaux mappings d'erreur.
+- **Action 2 :** étendre les tests frontend auth au parcours complet (soumission + messages d'erreur API).
+
+#### Liens
+- **Jira :** C.2.1, C.1.2, A.1.2
+- **Documentation associee :** docs/03_frontend/C2_1_auth_forms_minimal.md ; docs/02_backend/B1_3_C1_auth_foundation_without_jwt.md ; docs/STATUS.md
+- **PR/Commit (si disponible) :** a renseigner

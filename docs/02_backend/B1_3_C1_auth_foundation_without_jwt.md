@@ -95,6 +95,17 @@ Le choix réduit le risque de couplage et permet de livrer rapidement un socle e
 - `AuthServiceImplTest` couvre les cas critiques register/login (succès + erreurs).
 - `AuthControllerIntegrationTest` valide le flux register/login complet sur PostgreSQL Testcontainers.
 
+### Mise a jour review 2026-04-15
+- Ajout d'un logging serveur explicite dans `GlobalExceptionHandler` pour les exceptions inattendues (stacktrace conservée côté logs, message générique conservé côté client).
+- Ajout d'un mapping `DataIntegrityViolationException` vers `409 RESOURCE_CONFLICT` pour éviter les retours 500 opaques sur conflit de contrainte.
+- Vérification explicite de l'unicité `username` avant persistance dans `AuthServiceImpl` (409 + `RESOURCE_CONFLICT`).
+- Extension de la couche user (`UserRepository`/`UserService`) pour supporter le contrôle `existsByUsername`.
+- Extension des tests unitaires/intégration pour couvrir le scénario `duplicate username`.
+
+### Mise a jour warning cleanup 2026-04-15
+- Ajout du metadata Spring `backend/backend/src/main/resources/META-INF/additional-spring-configuration-metadata.json` pour enregistrer `app.cors.allowed-origins` et supprimer l alerte de propriete inconnue dans l IDE.
+- Nettoyage de warning nullability sur `UserServiceImpl.save` avec garde runtime (`Objects.requireNonNull`) conservee et suppression locale du warning pour le contrat JPA.
+
 ### Contrats impactes
 - **API :** Ajout endpoints register/login.
 - **Evenements :** non applicable.
@@ -121,7 +132,7 @@ Le choix réduit le risque de couplage et permet de livrer rapidement un socle e
 ### API
 - **Endpoints ajoutes/modifies :** `/api/v1/auth/register`, `/api/v1/auth/login`.
 - **Payload request/response :** DTOs Request/Response dédiés.
-- **Codes d'erreur et cas limites :** validation, conflit email, identifiants invalides.
+- **Codes d'erreur et cas limites :** validation, conflit email, conflit username, identifiants invalides.
 
 ### Evenements
 - **Flux d'evenements (si applicable) :** non applicable.
@@ -140,7 +151,7 @@ Le choix réduit le risque de couplage et permet de livrer rapidement un socle e
 - **Integration/E2E :** tests endpoints auth.
 
 ### Resultats
-- `mvn test`: OK (8 tests, 0 erreur, 0 échec).
+- `mvn test`: OK (10 tests, 0 erreur, 0 échec).
 - Register/login validés via test d'intégration `AuthControllerIntegrationTest` sur PostgreSQL Testcontainers.
 
 ### Verification manuelle

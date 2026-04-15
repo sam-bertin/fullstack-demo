@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -45,6 +46,7 @@ class AuthServiceImplTest {
         UserEntity persisted = buildUser(1L, "test@example.com", "tester", passwordEncoder.encode("password123"));
 
         when(userService.findByEmail("test@example.com")).thenReturn(Optional.empty());
+        when(userService.existsByUsername("tester")).thenReturn(false);
         when(userService.save(any(UserEntity.class))).thenReturn(persisted);
 
         AuthUserResponse response = authService.register(registerRequest);
@@ -66,6 +68,20 @@ class AuthServiceImplTest {
         AppException exception = assertThrows(AppException.class, () -> authService.register(registerRequest));
 
         assertEquals("Email is already used", exception.getMessage());
+        verify(userService, never()).existsByUsername(any(String.class));
+    }
+
+    @Test
+    void registerShouldFailWhenUsernameAlreadyExists() {
+        RegisterRequest registerRequest = new RegisterRequest("test@example.com", "tester", "password123");
+
+        when(userService.findByEmail("test@example.com")).thenReturn(Optional.empty());
+        when(userService.existsByUsername("tester")).thenReturn(true);
+
+        AppException exception = assertThrows(AppException.class, () -> authService.register(registerRequest));
+
+        assertEquals("Username is already used", exception.getMessage());
+        verify(userService, never()).save(any(UserEntity.class));
     }
 
     @Test
@@ -84,11 +100,12 @@ class AuthServiceImplTest {
     @Test
     void loginShouldFailWhenPasswordIsInvalid() {
         UserEntity user = buildUser(1L, "test@example.com", "tester", passwordEncoder.encode("password123"));
+        LoginRequest invalidPasswordRequest = new LoginRequest("test@example.com", "bad-password");
         when(userService.findByEmail("test@example.com")).thenReturn(Optional.of(user));
 
         AppException exception = assertThrows(
                 AppException.class,
-                () -> authService.login(new LoginRequest("test@example.com", "bad-password"))
+            () -> authService.login(invalidPasswordRequest)
         );
 
         assertEquals("Invalid credentials", exception.getMessage());
@@ -96,11 +113,12 @@ class AuthServiceImplTest {
 
     @Test
     void loginShouldFailWhenUserNotFound() {
+        LoginRequest unknownUserRequest = new LoginRequest("missing@example.com", "password123");
         when(userService.findByEmail("missing@example.com")).thenReturn(Optional.empty());
 
         AppException exception = assertThrows(
                 AppException.class,
-                () -> authService.login(new LoginRequest("missing@example.com", "password123"))
+            () -> authService.login(unknownUserRequest)
         );
 
         assertEquals("Invalid credentials", exception.getMessage());

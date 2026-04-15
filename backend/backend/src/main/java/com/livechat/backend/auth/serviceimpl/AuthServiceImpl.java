@@ -26,14 +26,19 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public AuthUserResponse register(RegisterRequest registerRequest) {
         String normalizedEmail = registerRequest.email().trim().toLowerCase();
+        String normalizedUsername = registerRequest.username().trim();
 
         if (userService.findByEmail(normalizedEmail).isPresent()) {
             throw new AppException("Email is already used", ErrorCode.RESOURCE_CONFLICT, HttpStatus.CONFLICT);
         }
 
+        if (userService.existsByUsername(normalizedUsername)) {
+            throw new AppException("Username is already used", ErrorCode.RESOURCE_CONFLICT, HttpStatus.CONFLICT);
+        }
+
         UserEntity userEntity = new UserEntity();
         userEntity.setEmail(normalizedEmail);
-        userEntity.setUsername(registerRequest.username().trim());
+        userEntity.setUsername(normalizedUsername);
         userEntity.setPasswordHash(passwordEncoder.encode(registerRequest.password()));
 
         UserEntity savedUser = userService.save(userEntity);

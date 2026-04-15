@@ -102,6 +102,10 @@ Cette combinaison est la plus simple pour rendre l environnement reproductible r
 - `docker-compose.yml`
   - Ajout d une instance PostgreSQL locale standardisee avec healthcheck et volume.
 
+### Mise a jour warning cleanup 2026-04-15
+- Migration des tests integration backend de l usage `PostgreSQLContainer` vers un conteneur generique PostgreSQL explicite (`GenericContainer`) pour supprimer le warning deprecation IDE.
+- URL JDBC test construite explicitement a partir de `host` et `mappedPort` pour conserver un comportement equivalent et transparent.
+
 ### Contrats impactes
 - **API :** aucun endpoint ajoute.
 - **Evenements :** aucun.
