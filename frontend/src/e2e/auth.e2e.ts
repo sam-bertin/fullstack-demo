@@ -5,7 +5,7 @@ test.describe('Auth UI E2E', () => {
     const suffix = Date.now()
     const email = `e2e.${suffix}@example.com`
     const username = `e2euser${suffix}`
-    const password = 'Password123!'
+    const password = 'testpass1'
 
     await page.goto('/')
 
@@ -14,22 +14,22 @@ test.describe('Auth UI E2E', () => {
     await page.getByLabel('Password').fill(password)
     await page.getByRole('button', { name: 'Créer un compte' }).click()
 
-    await expect(page.getByText('Register OK:')).toBeVisible()
+    await expect(page.locator('.feedback')).toContainText('Register OK:')
 
-    await page.getByRole('button', { name: 'Login', exact: true }).click()
+    await page.getByRole('tab', { name: 'Login', exact: true }).click()
     await page.getByRole('textbox', { name: 'Email' }).fill(email)
     await page.getByLabel('Password').fill(password)
     await page.getByRole('button', { name: 'Se connecter' }).click()
 
-    await expect(page.getByText('Login OK:')).toBeVisible()
+    await expect(page.locator('.feedback')).toContainText('Login OK:')
   })
 
   test('login invalid credentials returns API error feedback', async ({ page }) => {
     await page.goto('/')
 
-    await page.getByRole('button', { name: 'Login', exact: true }).click()
+    await page.getByRole('tab', { name: 'Login', exact: true }).click()
     await page.getByRole('textbox', { name: 'Email' }).fill('unknown@example.com')
-    await page.getByLabel('Password').fill('WrongPassword123!')
+    await page.getByLabel('Password').fill('testpass2')
     await page.getByRole('button', { name: 'Se connecter' }).click()
 
     await expect(page.getByText('INVALID_CREDENTIALS')).toBeVisible()
