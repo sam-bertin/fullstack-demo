@@ -1,30 +1,30 @@
 # Backend
 
 ## Stack
-- Java 21, Spring Boot, Maven, PostgreSQL.
+- **[Implémenté]** Java 21, Spring Boot, Maven, PostgreSQL driver.
 
 ## Modules
-- Documenter chaque module backend et ses responsabilites.
+- **[Prevu]** Documenter chaque module backend et ses responsabilites.
 
 ## Endpoints REST
-- Lister endpoint, methode HTTP, payload request/response, erreurs possibles.
+- **[Prevu]** Lister endpoint, methode HTTP, payload request/response, erreurs possibles.
 
 ## Securite
-- JWT stateless.
-- BCrypt.
-- Endpoints publics/prives.
+- **[Prevu]** JWT stateless.
+- **[Prevu]** BCrypt.
+- **[Prevu]** Endpoints publics/prives.
 
 ## Validation
-- Regles de validation DTO.
-- Comportements d'erreur associes.
+- **[Prevu]** Regles de validation DTO.
+- **[Prevu]** Comportements d'erreur associes.
 
 ## Persistence
-- Entites, relations, index, contraintes.
-- Politique de migration/schema.
+- **[Prevu]** Entites, relations, index, contraintes.
+- **[Prevu]** Politique de migration/schema.
 
 ## Tests
-- Strategie de tests unitaires/integration.
-- Couverture cible et zones critiques.
+- **[Partiellement Implémenté]** Strategie de tests unitaires/integration.
+- **[Prevu]** Couverture cible et zones critiques.
 
 ## Trace Jira
 - Ticket(s): a renseigner.
