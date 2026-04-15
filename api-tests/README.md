@@ -33,6 +33,20 @@ npm install -g @usebruno/cli
 bru run ./api-tests/auth --env local
 ```
 
+### Execution locale robuste (evite les collisions utilisateur)
+Si un utilisateur de test existe deja en base avec un ancien mot de passe, le scenario login peut echouer en 401.
+Pour garantir un run vert avant CI, lancer la collection avec des variables uniques:
+
+```powershell
+cd api-tests
+$suffix = Get-Date -Format "yyyyMMddHHmmss"
+npx @usebruno/cli run ./auth --env local `
+	--env-var authEmail=bruno.auth.$suffix@example.com `
+	--env-var authUsername=brunouser$suffix `
+	--env-var authPass=testpass1 `
+	--env-var invalidPass=testpass2
+```
+
 ## Notes
 - Le scenario register est idempotent: il accepte 201 (nouvel utilisateur) ou 409 (utilisateur deja cree).
 - L'utilisateur de test est configure dans les fichiers d'environnement Bruno.

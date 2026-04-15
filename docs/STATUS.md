@@ -48,6 +48,7 @@ Ce document centralise l'etat actuel d'avancement des taches par rapport au plan
 	- Verification explicite de l unicite username en register + tests unitaires/integration associes.
 	- Passe warning cleanup: metadata Spring pour `app.cors.allowed-origins`, migration Testcontainers anti-deprecation, et correction des warnings JSX labels/inputs.
 	- Option 1 appliquee: reduction du bruit runtime des tests backend via configuration Surefire Mockito (agent pre-attache) et logging test cible sur Testcontainers.
+	- Hygiene CI API tests renforcee: variables Bruno renommees (`authPass`/`invalidPass`) et valeurs placeholders non sensibles pour limiter les faux positifs secret scanning/Sonar.
 
 ## MVP Chat (EPIC D) - *A venir*
 - Non demarre

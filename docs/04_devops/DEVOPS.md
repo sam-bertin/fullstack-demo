@@ -79,6 +79,11 @@
 - `npx @usebruno/cli run ./auth --env local`
 - Attendu: 4 requetes passees et 9 tests Bruno verts.
 
+### Hygiene secrets API tests (CI/Sonar)
+- Les fichiers `api-tests/environments/*.bru` doivent contenir uniquement des valeurs de test non sensibles (placeholders), jamais de secrets reels.
+- Convention actuelle: `authPass` et `invalidPass` avec valeurs deterministes de test pour eviter les faux positifs de secret scanning dans les pipelines.
+- En cas de besoin, surcharger ces variables uniquement via environnement CI, sans commiter de credentials.
+
 ### Commandes minimales de verification E2E frontend (Playwright)
 - `docker compose up -d postgres`
 - `cd backend/backend`
