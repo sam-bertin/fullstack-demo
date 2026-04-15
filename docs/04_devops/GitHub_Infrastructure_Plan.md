@@ -2,7 +2,13 @@
 
 **Clé Jira** : B.3.1 (Workflow CI backend) et B.3.2 (Workflow CI frontend)  
 **Date** : 2026-04-10 (Planning)  
-**Statut** : Plan (implémentation reportée à B.3.1/B.3.2)
+**Statut** : Plan historique (partiellement implemente)
+
+> Note de contexte (2026-04-15)
+> Ce document reste une trace de cadrage initial.
+> La source de verite operationnelle est maintenant:
+> - `docs/04_devops/DEVOPS.md`
+> - `docs/04_devops/B3_3_api_bruno_playwright_quality_gates.md`
 
 ---
 
@@ -172,8 +178,9 @@ Via `Actions` → Sélectionner run → "Re-run failed jobs"
 
 ## Prochaines étapes
 
-- ⏳ **B.1.1** : Créer backend/ avec pom.xml
-- ⏳ **B.2.1** : Créer frontend/ avec package.json
-- ⏳ **B.3.1** : Créer `.github/workflows/ci-backend.yml`
-- ⏳ **B.3.2** : Créer `.github/workflows/ci-frontend.yml`
-- ⏳ **B.3.3** : Activer `required_status_checks` dans `branch-ruleset.json`
+- ✅ **B.1.1** : Backend initialise
+- ✅ **B.2.1** : Frontend initialise
+- ✅ **B.3.1** : `.github/workflows/ci-backend.yml` actif (push + pull_request)
+- ✅ **B.3.2** : `.github/workflows/ci-frontend.yml` actif (push + pull_request)
+- ✅ **B.3.3 (partie implementation)** : `.github/workflows/ci-qa.yml` actif (Bruno + Playwright)
+- 🚧 **B.3.3 (reste a faire)** : Activer checks frontend et QA dans `required_status_checks` de `branch-ruleset.json`

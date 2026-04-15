@@ -105,6 +105,8 @@ Cette combinaison est la plus simple pour rendre l environnement reproductible r
 ### Mise a jour warning cleanup 2026-04-15
 - Migration des tests integration backend de l usage `PostgreSQLContainer` vers un conteneur generique PostgreSQL explicite (`GenericContainer`) pour supprimer le warning deprecation IDE.
 - URL JDBC test construite explicitement a partir de `host` et `mappedPort` pour conserver un comportement equivalent et transparent.
+- Configuration Surefire mise a jour pour pre-attacher l agent Byte Buddy en phase test et supprimer les warnings Mockito lies a l auto-attach dynamique.
+- Ajout d un `logback-test.xml` scope test pour reduire le bruit de probing Docker/Testcontainers tout en conservant les logs utiles de cycle de vie des conteneurs.
 
 ### Contrats impactes
 - **API :** aucun endpoint ajoute.
@@ -209,6 +211,7 @@ Cette combinaison est la plus simple pour rendre l environnement reproductible r
 - **v1 :** Cadrage initial et perimetre technique valide.
 - **v2 :** Implementation technique (profils, Flyway, compose, Testcontainers).
 - **v3 :** Validation technique completee et documentation synchronisee.
+- **v4 :** Nettoyage du bruit runtime de tests backend (Mockito/Surefire + logs Testcontainers) et revalidation.
 
 ## 16) Texte Jira pret a coller
 

@@ -31,7 +31,8 @@
 ## Tests
 - **[Implémente]** Tests integration PostgreSQL Testcontainers pour auth controller.
 - **[Implémente]** Tests unitaires service auth (`AuthServiceImplTest`).
+- **[Implémente]** Tests API smoke auth partage via Bruno (B.3.3).
 - **[Prevu]** Etendre la couverture des services metier suivants.
 
 ## Trace Jira
-- Ticket(s): A.1.1, A.1.2, A.2.1, A.2.2, A.3.1, B.1.2, B.1.3, C.1.1, C.1.2, C.1.3.
+- Ticket(s): A.1.1, A.1.2, A.2.1, A.2.2, A.3.1, B.1.2, B.1.3, B.3.1, B.3.3, C.1.1, C.1.2, C.1.3.

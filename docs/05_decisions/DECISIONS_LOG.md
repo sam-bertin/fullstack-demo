@@ -409,3 +409,35 @@ L'implémentation ajoute un peu de code d'infrastructure (clavier/focus ARIA et 
 - **Jira :** C.2.1, C.1.2, A.1.2
 - **Documentation associee :** docs/03_frontend/C2_1_auth_forms_minimal.md ; docs/02_backend/B1_3_C1_auth_foundation_without_jwt.md ; docs/STATUS.md
 - **PR/Commit (si disponible) :** a renseigner
+
+### Decision 2026-04-15 - B.3.3
+
+#### Contexte
+Les checks backend/frontend existaient deja, mais l'equipe n'avait pas encore de socle partage pour rejouer les tests API auth et les parcours UI critiques avant merge.
+
+#### Decision retenue
+Mettre en place une gate qualite merge B.3.3 en trois briques:
+- collection Bruno versionnee dans `api-tests/` pour smoke API auth,
+- suite Playwright pour E2E auth frontend,
+- workflow CI QA dedie (`ci-qa.yml`) execute sur `push` et `pull_request`.
+
+#### Alternatives considerees
+- Conserver des tests manuels locaux non versionnes.
+- Utiliser Cypress au lieu de Playwright.
+- Limiter B.3.3 aux workflows backend/frontend existants sans gate API/E2E dediee.
+
+#### Compromis
+Pipeline PR un peu plus longue, mais meilleure detection des regressions transverses API/UI et diagnostic plus rapide grace aux artifacts de debug.
+
+#### Impacts
+- **Court terme :** execution automatisable locale et CI de scenarios auth critiques.
+- **Long terme :** base solide pour etendre la couverture vers JWT/protections endpoint et parcours utilisateur complets.
+
+#### Actions de suivi
+- **Action 1 :** activer les checks frontend et QA en required status checks sur `main`.
+- **Action 2 :** etendre Bruno/Playwright quand C.1.4 et C.2.3 seront implementes.
+
+#### Liens
+- **Jira :** B.3.3
+- **Documentation associee :** docs/04_devops/B3_3_api_bruno_playwright_quality_gates.md
+- **PR/Commit (si disponible) :** a renseigner

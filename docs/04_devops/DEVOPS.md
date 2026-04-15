@@ -3,11 +3,16 @@
 ## CI/CD
 - Workflow backend actif: `.github/workflows/ci-backend.yml`.
 - Workflow frontend actif: `.github/workflows/ci-frontend.yml`.
+- Workflow QA actif: `.github/workflows/ci-qa.yml`.
 - Gates qualite backend: Checkstyle, tests JUnit 5, build Maven.
 - Gates qualite frontend: ESLint, tests Vitest, build Vite.
-- Merge sur `main` bloque si les checks backend requis sont rouges.
-- Trigger backend CI: `push` uniquement, avec filtres sur les fichiers backend/workflow.
-- Trigger frontend CI: `push` uniquement, avec filtres sur les fichiers frontend/workflow.
+- Gates qualite QA: API smoke Bruno, E2E Playwright.
+- Merge sur `main` bloque si les checks backend requis sont rouges (etat actuel de `branch-ruleset.json`).
+- Checks frontend et QA disponibles en CI, mais encore a activer en required status checks pour bloquer le merge.
+- Trigger backend CI: `pull_request` uniquement (types `opened`, `synchronize`, `reopened`, `ready_for_review`) avec filtres backend/workflow.
+- Trigger frontend CI: `pull_request` uniquement (types `opened`, `synchronize`, `reopened`, `ready_for_review`) avec filtres frontend/workflow.
+- Trigger workflow QA: `pull_request` uniquement (types `opened`, `synchronize`, `reopened`, `ready_for_review`) avec filtres backend/frontend/api-tests/workflow.
+- Concurrency active sur les 3 workflows CI (`cancel-in-progress: true`) pour annuler les runs obsoletes sur une meme PR et eviter les doublons de pipeline.
 - Execution backend CI sur runner natif `ubuntu-latest` avec `./mvnw`.
 - Execution frontend CI sur runner natif `ubuntu-latest` avec `npm ci`.
 - Le wrapper Maven du depot porte la version Maven, `setup-java` ne gere que le JDK 21 et le cache Maven.
@@ -15,9 +20,9 @@
 - Cache npm frontend gere par `actions/setup-node@v4` avec `cache: 'npm'` et `cache-dependency-path: frontend/package-lock.json`.
 
 ## Docker
-- Orchestration locale PostgreSQL implantee via `docker-compose.yml` (B.1.2).
-- Dockerfile backend multi-stage: prevu.
-- Dockerfile frontend multi-stage + nginx: prevu.
+- Dockerfile backend multi-stage: prevu (non versionne pour le moment).
+- Dockerfile frontend multi-stage + nginx: prevu (non versionne pour le moment).
+- Orchestration locale PostgreSQL via `docker-compose.yml`.
 
 ## Workflow Git
 - Branching model.
@@ -55,21 +60,6 @@
 - `.\mvnw.cmd -DskipTests clean package`
 - Attendu: `LINT_OK`, `TEST_OK`, `PACKAGE_OK`
 
-### Commandes minimales de verification B.1.2 (data strategy)
-- `docker compose up -d postgres`
-- `cd backend/backend`
-- `.\mvnw.cmd test`
-- `.\mvnw.cmd -DskipTests spring-boot:run`
-- Attendu: migration Flyway appliquee, datasource PostgreSQL connectee, backend demarre.
-
-### Commandes minimales de verification sprint auth sans JWT
-- `cd backend/backend`
-- `.\mvnw.cmd test`
-- Attendu: `AuthServiceImplTest` et `AuthControllerIntegrationTest` passent sur PostgreSQL Testcontainers.
-- `cd frontend`
-- `npm run lint && npm run test && npm run build`
-- Attendu: UI auth minimale compile et tests/lint restent verts.
-
 ### Commandes minimales de verification CI frontend
 - `cd frontend`
 - `npm ci`
@@ -77,6 +67,49 @@
 - `npm run test`
 - `npm run build`
 - Attendu: `LINT_OK`, `TEST_OK`, `BUILD_OK`
+
+### Commande pre-push frontend (local)
+- `cd frontend`
+- `npm run verify:prepush`
+- Attendu: lint + unit tests + build + E2E Playwright verts.
+
+### Commande pre-push globale (local)
+- Depuis la racine du repo:
+- `pwsh -File .\scripts\verify-prepush-full.ps1`
+- Attendu: backend (checkstyle/tests/package) + Bruno API + frontend `verify:prepush` verts.
+
+### Commandes minimales de verification API smoke partage (Bruno)
+- `docker compose up -d postgres`
+- `cd backend/backend`
+- `$env:DB_URL='jdbc:postgresql://localhost:5432/livechat'`
+- `$env:DB_USER='livechat'`
+- `$env:DB_PASSWORD='livechat'`
+- `$env:APP_CORS_ALLOWED_ORIGINS='http://127.0.0.1:5173,http://localhost:5173'`
+- `.\mvnw.cmd -DskipTests spring-boot:run`
+- Dans un deuxieme terminal: `cd api-tests`
+- `npx @usebruno/cli run ./auth --env local`
+- Attendu: 4 requetes passees et 9 tests Bruno verts.
+
+### Hygiene secrets API tests (CI/Sonar)
+- Les fichiers `api-tests/environments/*.bru` doivent contenir uniquement des valeurs de test non sensibles (placeholders), jamais de secrets reels.
+- Convention actuelle: `authPass` et `invalidPass` avec valeurs deterministes de test pour eviter les faux positifs de secret scanning dans les pipelines.
+- En cas de besoin, surcharger ces variables uniquement via environnement CI, sans commiter de credentials.
+
+### Commandes minimales de verification E2E frontend (Playwright)
+- `docker compose up -d postgres`
+- `cd backend/backend`
+- `$env:DB_URL='jdbc:postgresql://localhost:5432/livechat'`
+- `$env:DB_USER='livechat'`
+- `$env:DB_PASSWORD='livechat'`
+- `$env:APP_CORS_ALLOWED_ORIGINS='http://127.0.0.1:5173,http://localhost:5173'`
+- `.\mvnw.cmd -DskipTests spring-boot:run`
+- Dans un deuxieme terminal: `cd frontend`
+- `npm ci`
+- `npx playwright install chromium`
+- `$env:VITE_API_BASE_URL='http://localhost:8080'`
+- `$env:PLAYWRIGHT_BASE_URL='http://localhost:5173'`
+- `npm run e2e`
+- Attendu: scenarios register/login et erreur credentials passent.
 
 ### Branch protection backend
 - `branch-ruleset.json` exige pour `main`:
@@ -86,10 +119,14 @@
 
 ### Branch protection frontend
 - Les checks frontend sont maintenant disponibles via le workflow CI Frontend.
-- Leur activation comme checks requis de merge est prevue dans B.3.3.
+- Leur activation comme checks requis de merge est en cours dans B.3.3.
+
+### Branch protection QA
+- Checks candidats pour required status checks:
+	- `CI QA / QA Integration (Bruno + Playwright)`
 
 ## Trace Jira
-- Ticket(s): a renseigner.
+- Ticket(s): B.3.3.
 
 
 

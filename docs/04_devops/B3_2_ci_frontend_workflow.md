@@ -10,6 +10,11 @@
 - Date : 2026-04-10
 - Auteur : GitHub Copilot
 
+> Note de contexte (2026-04-15)
+> Cette fiche decrit l'implementation initiale B.3.2.
+> Les extensions ulterieures (trigger `pull_request`, workflow QA B.3.3, etat des required checks)
+> sont tracees dans `docs/04_devops/DEVOPS.md` et `docs/04_devops/B3_3_api_bruno_playwright_quality_gates.md`.
+
 ### Liens de travail
 - Branche Git : a renseigner
 - Pull Request : a renseigner

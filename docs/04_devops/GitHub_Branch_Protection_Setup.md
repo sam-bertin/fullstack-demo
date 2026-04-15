@@ -2,7 +2,12 @@
 
 **Clé Jira** : A.3.3 (DoD CI/CD - Phase 1)  
 **Date** : 2026-04-10  
-**Statut** : Implémenté et actif
+**Statut** : Implemente et actif (mise a jour de coherence: 2026-04-15)
+
+> Note de contexte (2026-04-15)
+> Ce document decrit le setup initial A.3.3 Phase 1.
+> L'etat courant CI/CD (workflows backend/frontend/QA et reste a faire sur required checks)
+> est suivi dans `docs/04_devops/DEVOPS.md` et `docs/04_devops/B3_3_api_bruno_playwright_quality_gates.md`.
 
 ---
 
@@ -69,7 +74,7 @@ Branche `main` (`~DEFAULT_BRANCH`)
 
 ---
 
-## Phase 2 (déferred)
+## Phase 2 (historique puis mise a jour)
 
 Une fois **B.3.1** et **B.3.2** terminés, les workflows seront **requis** comme status checks :
 
@@ -135,9 +140,9 @@ git push origin feature/test
 
 ## Limitations actuelles
 
-1. **Aucun required status check** (workflows pas encore implémentés)
-   → Tu peux merger même si hypothétique linting/test échoueraient
-   → Sera corrigé à B.3.1/B.3.2
+1. **Required status checks incomplets**
+   → Backend requis actif dans `branch-ruleset.json`
+   → Frontend et QA encore a activer comme checks requis (B.3.3)
 
 2. **Reviews périmées ne sont jamais dismissées**
    → Ancienne review reste valide même après nouveau commit
@@ -154,7 +159,7 @@ git push origin feature/test
 | Étape | Jira | Statut | Description |
 |-------|------|--------|-------------|
 | Phase 1 | A.3.3 | ✅ Terminé | Protection branche (suppression, PR obligatoire, review, threads) |
-| Phase 2 | B.3.1/B.3.2 | ⏳ Pending | Workflows CI + required status checks |
+| Phase 2 | B.3.1/B.3.2/B.3.3 | 🚧 Partiel | Workflows CI backend/frontend/QA actifs, required checks frontend+QA restants |
 
 ---
 
