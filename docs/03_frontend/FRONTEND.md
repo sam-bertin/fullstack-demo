@@ -2,7 +2,7 @@
 
 ## Stack
 - **Installe actuel**: React 19, TypeScript strict, Vite.
-- **Installe actuel**: Axios, React Hook Form, Zod, hookform/resolvers.
+- **Librairies ajoutees**: Axios, React Hook Form, Zod, hookform/resolvers.
 - **Prevu prochainement**: Tailwind.
 
 ## Organisation
