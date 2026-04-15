@@ -19,7 +19,7 @@ Ce document centralise l'etat actuel d'avancement des taches par rapport au plan
 | Cle Jira | Composant | Description | Statut | Implementation Code | Documentation |
 |---|---|---|---|---|---|
 | B.1.1 | Backend | Initialisation Spring Boot | ✅ Bootstrapped | Oui | Documente |
-| B.1.2 | Backend | Config PostgreSQL & profils | 📝 Prevu | Non | A documenter |
+| B.1.2 | Backend | Config PostgreSQL & profils | ✅ Termine | Oui | Documente |
 | B.1.3 | Backend | Architecture en couches | 📝 Prevu | Non | A documenter |
 | B.2.1 | Frontend | React Vite TS Strict (React 19) | ✅ Bootstrapped | Oui | Documente |
 | B.2.2 | Frontend | Dependances coeur | 📝 Prevu | Non | A documenter |

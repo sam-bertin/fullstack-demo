@@ -1,7 +1,9 @@
 # Backend
 
 ## Stack
-- **[Implémenté]** Java 21, Spring Boot, Maven, PostgreSQL driver.
+- **[Implémente]** Java 21, Spring Boot, Maven, PostgreSQL driver.
+- **[Implémente]** Flyway pour migration SQL versionnee.
+- **[Implémente]** Testcontainers PostgreSQL pour tests integration backend.
 
 ## Modules
 - **[Prevu]** Documenter chaque module backend et ses responsabilites.
@@ -19,12 +21,13 @@
 - **[Prevu]** Comportements d'erreur associes.
 
 ## Persistence
-- **[Prevu]** Entites, relations, index, contraintes.
-- **[Prevu]** Politique de migration/schema.
+- **[Partiellement Implemente]** Configuration datasource profilee (`dev`) via variables d environnement.
+- **[Partiellement Implemente]** Baseline Flyway `V1__init_schema.sql` (table `users`, index email).
+- **[Prevu]** Entites JPA metier, relations et contraintes finales.
 
 ## Tests
-- **[Partiellement Implémenté]** Strategie de tests unitaires/integration.
-- **[Prevu]** Couverture cible et zones critiques.
+- **[Partiellement Implemente]** Test Spring Boot d integration sur PostgreSQL Testcontainers.
+- **[Prevu]** Extension des tests service/repository/controllers avec couverture cible 80%+ couche service.
 
 ## Trace Jira
-- Ticket(s): a renseigner.
+- Ticket(s): A.1.1, A.1.2, A.2.1, A.2.2, A.3.1, B.1.2.
