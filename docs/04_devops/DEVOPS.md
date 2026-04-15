@@ -9,9 +9,10 @@
 - Gates qualite QA: API smoke Bruno, E2E Playwright.
 - Merge sur `main` bloque si les checks backend requis sont rouges (etat actuel de `branch-ruleset.json`).
 - Checks frontend et QA disponibles en CI, mais encore a activer en required status checks pour bloquer le merge.
-- Trigger backend CI: `push` + `pull_request`, avec filtres sur les fichiers backend/workflow.
-- Trigger frontend CI: `push` + `pull_request`, avec filtres sur les fichiers frontend/workflow.
-- Trigger workflow QA: `push` + `pull_request`, avec filtres backend/frontend/api-tests/workflow.
+- Trigger backend CI: `pull_request` uniquement (types `opened`, `synchronize`, `reopened`, `ready_for_review`) avec filtres backend/workflow.
+- Trigger frontend CI: `pull_request` uniquement (types `opened`, `synchronize`, `reopened`, `ready_for_review`) avec filtres frontend/workflow.
+- Trigger workflow QA: `pull_request` uniquement (types `opened`, `synchronize`, `reopened`, `ready_for_review`) avec filtres backend/frontend/api-tests/workflow.
+- Concurrency active sur les 3 workflows CI (`cancel-in-progress: true`) pour annuler les runs obsoletes sur une meme PR et eviter les doublons de pipeline.
 - Execution backend CI sur runner natif `ubuntu-latest` avec `./mvnw`.
 - Execution frontend CI sur runner natif `ubuntu-latest` avec `npm ci`.
 - Le wrapper Maven du depot porte la version Maven, `setup-java` ne gere que le JDK 21 et le cache Maven.
@@ -122,8 +123,7 @@
 
 ### Branch protection QA
 - Checks candidats pour required status checks:
-	- `CI QA / API Smoke (Bruno)`
-	- `CI QA / Frontend E2E (Playwright)`
+	- `CI QA / QA Integration (Bruno + Playwright)`
 
 ## Trace Jira
 - Ticket(s): B.3.3.

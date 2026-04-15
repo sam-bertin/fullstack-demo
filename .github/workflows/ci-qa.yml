@@ -2,93 +2,25 @@ name: CI QA
 
 on:
   pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
     paths:
       - 'backend/backend/**'
       - 'frontend/**'
       - 'api-tests/**'
       - '.github/workflows/ci-qa.yml'
-  push:
-    paths:
-      - 'backend/backend/**'
-      - 'frontend/**'
-      - 'api-tests/**'
-      - '.github/workflows/ci-qa.yml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 jobs:
-  api-smoke-bruno:
-    name: API Smoke (Bruno)
+  qa-integration:
+    name: QA Integration (Bruno + Playwright)
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:16-alpine
-        env:
-          POSTGRES_DB: livechat
-          POSTGRES_USER: livechat
-          POSTGRES_PASSWORD: livechat
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd "pg_isready -U livechat -d livechat"
-          --health-interval 5s
-          --health-timeout 5s
-          --health-retries 10
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Java and Maven cache
-        uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-          cache: 'maven'
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
-      - name: Ensure Maven wrapper is executable
-        working-directory: backend/backend
-        run: chmod +x ./mvnw
-
-      - name: Start backend in background
-        working-directory: backend/backend
-        env:
-          DB_URL: jdbc:postgresql://localhost:5432/livechat
-          DB_USER: livechat
-          DB_PASSWORD: livechat
-        run: ./mvnw -q -DskipTests spring-boot:run > ../../backend-run.log 2>&1 &
-
-      - name: Wait for backend health
-        shell: bash
-        run: |
-          for i in {1..90}; do
-            if curl -fsS http://localhost:8080/actuator/health > /dev/null; then
-              echo "Backend is healthy"
-              exit 0
-            fi
-            sleep 2
-          done
-          echo "Backend did not become healthy in time"
-          tail -n 200 backend-run.log || true
-          exit 1
-
-      - name: Run Bruno auth collection
-        working-directory: api-tests
-        run: npx @usebruno/cli run ./auth --env ci
-
-      - name: Upload backend startup log
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: qa-backend-run-log
-          path: backend-run.log
-          retention-days: 5
-
-  frontend-e2e-playwright:
-    name: Frontend E2E (Playwright)
-    runs-on: ubuntu-latest
-    needs: [api-smoke-bruno]
     services:
       postgres:
         image: postgres:16-alpine
@@ -131,7 +63,7 @@ jobs:
           DB_USER: livechat
           DB_PASSWORD: livechat
           APP_CORS_ALLOWED_ORIGINS: http://127.0.0.1:5173,http://localhost:5173
-        run: ./mvnw -q -DskipTests spring-boot:run > ../../backend-run-e2e.log 2>&1 &
+        run: ./mvnw -q -DskipTests spring-boot:run > ../../backend-run-qa.log 2>&1 &
 
       - name: Wait for backend health
         shell: bash
@@ -144,8 +76,12 @@ jobs:
             sleep 2
           done
           echo "Backend did not become healthy in time"
-          tail -n 200 backend-run-e2e.log || true
+          tail -n 200 backend-run-qa.log || true
           exit 1
+
+      - name: Run Bruno auth collection
+        working-directory: api-tests
+        run: npx @usebruno/cli run ./auth --env ci
 
       - name: Install frontend dependencies
         working-directory: frontend
@@ -176,6 +112,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: qa-backend-run-e2e-log
-          path: backend-run-e2e.log
+          name: qa-backend-run-log
+          path: backend-run-qa.log
           retention-days: 5

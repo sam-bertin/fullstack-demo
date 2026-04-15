@@ -24,9 +24,9 @@ Ce document centralise l'etat actuel d'avancement des taches par rapport au plan
 | B.2.1 | Frontend | React Vite TS Strict (React 19) | ✅ Bootstrapped | Oui | Documente |
 | B.2.2 | Frontend | Dependances coeur | 🚧 Partiel | Partiel | A completer |
 | B.2.3 | Frontend | Structure features | 📝 Prevu | Non | A documenter |
-| B.3.1 | CI/CD | CI Backend | ✅ Termine | Oui (Push + Pull Request) | Documente |
-| B.3.2 | CI/CD | CI Frontend | ✅ Termine | Oui (Push + Pull Request) | Documente |
-| B.3.3 | CI/CD | Gate de qualite merge | 🚧 Partiel | Oui (workflow QA + tests Bruno/Playwright) / Required checks frontend+QA en attente | Documente |
+| B.3.1 | CI/CD | CI Backend | ✅ Termine | Oui (Pull Request uniquement + concurrency) | Documente |
+| B.3.2 | CI/CD | CI Frontend | ✅ Termine | Oui (Pull Request uniquement + concurrency) | Documente |
+| B.3.3 | CI/CD | Gate de qualite merge | 🚧 Partiel | Oui (workflow QA integre Bruno+Playwright en job unique, Pull Request uniquement + concurrency) / Required checks frontend+QA en attente | Documente |
 
 ## MVC Authentification (EPIC C)
 
@@ -50,6 +50,8 @@ Ce document centralise l'etat actuel d'avancement des taches par rapport au plan
 	- Option 1 appliquee: reduction du bruit runtime des tests backend via configuration Surefire Mockito (agent pre-attache) et logging test cible sur Testcontainers.
 	- Hygiene CI API tests renforcee: variables Bruno renommees (`authPass`/`invalidPass`) et valeurs placeholders non sensibles pour limiter les faux positifs secret scanning/Sonar.
 	- Ajout d une commande pre-push globale locale (`scripts/verify-prepush-full.ps1`) couvrant backend + API smoke Bruno + frontend verify pour aligner la verification locale sur la CI.
+	- Optimisation CI appliquee sur backend/frontend/QA: suppression des triggers `push`, conservation en `pull_request` uniquement, et annulation automatique des runs obsoletes via `concurrency.cancel-in-progress`.
+	- Optimisation QA interne: fusion des jobs `API Smoke` et `Frontend E2E` en un job unique `QA Integration (Bruno + Playwright)` pour supprimer la duplication de setup backend/postgres.
 
 ## MVP Chat (EPIC D) - *A venir*
 - Non demarre
