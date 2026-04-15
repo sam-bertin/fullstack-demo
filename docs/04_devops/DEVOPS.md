@@ -67,6 +67,16 @@
 - `npm run build`
 - Attendu: `LINT_OK`, `TEST_OK`, `BUILD_OK`
 
+### Commande pre-push frontend (local)
+- `cd frontend`
+- `npm run verify:prepush`
+- Attendu: lint + unit tests + build + E2E Playwright verts.
+
+### Commande pre-push globale (local)
+- Depuis la racine du repo:
+- `pwsh -File .\scripts\verify-prepush-full.ps1`
+- Attendu: backend (checkstyle/tests/package) + Bruno API + frontend `verify:prepush` verts.
+
 ### Commandes minimales de verification API smoke partage (Bruno)
 - `docker compose up -d postgres`
 - `cd backend/backend`
@@ -95,8 +105,8 @@
 - Dans un deuxieme terminal: `cd frontend`
 - `npm ci`
 - `npx playwright install chromium`
-- `$env:VITE_API_BASE_URL='http://127.0.0.1:8080'`
-- `$env:PLAYWRIGHT_BASE_URL='http://127.0.0.1:5173'`
+- `$env:VITE_API_BASE_URL='http://localhost:8080'`
+- `$env:PLAYWRIGHT_BASE_URL='http://localhost:5173'`
 - `npm run e2e`
 - Attendu: scenarios register/login et erreur credentials passent.
 

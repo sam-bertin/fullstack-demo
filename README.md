@@ -46,6 +46,24 @@ npm run test
 npm run build
 ```
 
+## Verification Globale Avant Push CI
+
+Pre-requis:
+- Docker Desktop actif
+- Backend demarre et healthy sur `http://localhost:8080`
+
+Commande unique (PowerShell):
+
+```powershell
+pwsh -File .\scripts\verify-prepush-full.ps1
+```
+
+Cette commande enchaine:
+- PostgreSQL local (`docker compose up -d postgres`)
+- Backend: checkstyle + tests + package
+- API tests Bruno (avec utilisateur unique par execution)
+- Frontend: `npm run verify:prepush`
+
 ## Documentation
 
 La documentation de reference et l'onboarding detaillé se trouvent dans le dossier `docs/` :

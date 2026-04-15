@@ -1,5 +1,27 @@
 # React + TypeScript + Vite
 
+## Verification Pre-Push Frontend
+
+Prerequis:
+- Backend demarre sur http://localhost:8080
+- Dependances frontend installees (`npm ci`)
+
+Commande unique:
+
+```bash
+npm run verify:prepush
+```
+
+Cette commande enchaine:
+- lint (`npm run lint`)
+- unit tests (`npm run test`)
+- build (`npm run build`)
+- E2E Playwright local (`npm run e2e:local`)
+
+Notes locales:
+- Le fallback API frontend est `http://localhost:8080`.
+- Les E2E utilisent `http://localhost:5173` par defaut pour eviter les problemes CORS locaux entre `127.0.0.1` et `localhost`.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

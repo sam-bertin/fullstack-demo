@@ -49,6 +49,7 @@ Ce document centralise l'etat actuel d'avancement des taches par rapport au plan
 	- Passe warning cleanup: metadata Spring pour `app.cors.allowed-origins`, migration Testcontainers anti-deprecation, et correction des warnings JSX labels/inputs.
 	- Option 1 appliquee: reduction du bruit runtime des tests backend via configuration Surefire Mockito (agent pre-attache) et logging test cible sur Testcontainers.
 	- Hygiene CI API tests renforcee: variables Bruno renommees (`authPass`/`invalidPass`) et valeurs placeholders non sensibles pour limiter les faux positifs secret scanning/Sonar.
+	- Ajout d une commande pre-push globale locale (`scripts/verify-prepush-full.ps1`) couvrant backend + API smoke Bruno + frontend verify pour aligner la verification locale sur la CI.
 
 ## MVP Chat (EPIC D) - *A venir*
 - Non demarre
