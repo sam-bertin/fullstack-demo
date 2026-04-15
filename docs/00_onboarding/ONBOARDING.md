@@ -151,15 +151,27 @@ Objectif: etre autonome sur les actions quotidiennes (run, debug, tests, build) 
 - Debug session fonctionnelle avec breakpoint.
 
 ## Variables d'environnement
-- Documenter ici toutes les variables backend/frontend avec exemples.
-- Indiquer lesquelles sont obligatoires, optionnelles, et leur valeur par defaut.
+- Backend (B.1.2):
+	- `DB_URL` (optionnelle en local) - defaut: `jdbc:postgresql://localhost:5432/livechat`
+	- `DB_USER` (optionnelle en local) - defaut: `livechat`
+	- `DB_PASSWORD` (optionnelle en local) - defaut: `livechat`
+- Note: en environnement partage/prod, ces valeurs doivent etre injectees via secrets CI/CD et ne jamais etre committees.
 
 ## Premier demarrage (local)
 1. Cloner le repository.
-2. Configurer les variables d'environnement.
-3. Demarrer la base de donnees.
-4. Lancer backend puis frontend.
-5. Verifier l'acces a l'application et aux endpoints de sante.
+2. Configurer les variables d'environnement (ou utiliser les valeurs par defaut B.1.2).
+3. Demarrer PostgreSQL local:
+	- `docker compose up -d postgres`
+4. Lancer le backend:
+	- `cd backend/backend`
+	- `.\mvnw.cmd -DskipTests spring-boot:run`
+5. Verifier dans les logs:
+	- profil `dev` actif
+	- datasource PostgreSQL connectee
+	- migration Flyway `V1` appliquee
+6. Lancer le frontend (si besoin):
+	- `cd frontend`
+	- `npm run dev`
 
 ## Verification rapide
 - Backend: demarrage OK, tests OK.
@@ -272,6 +284,24 @@ Entree courante (validation B.3.2 - CI frontend):
 	- Artefact frontend `dist/` genere.
 - Action suivante:
 	- Enchainer sur B.3.3 pour activer les checks frontend comme required status checks sur `main`.
+
+Entree courante (validation B.1.2 - strategie data backend):
+- Date: 2026-04-15
+- Cle Jira: B.1.2
+- Contexte: mise en place profils Spring datasource, Flyway, PostgreSQL local via compose, test integration Testcontainers.
+- Commandes executees:
+	- `docker compose up -d postgres`
+	- `.\mvnw.cmd checkstyle:check`
+	- `.\mvnw.cmd test`
+	- `.\mvnw.cmd -DskipTests clean package`
+	- `.\mvnw.cmd -DskipTests spring-boot:run`
+- Resultat observe:
+	- `LINT_OK`
+	- `TEST_OK` (Spring Boot + PostgreSQL Testcontainers)
+	- `PACKAGE_OK`
+	- Backend demarre avec profile `dev` sur PostgreSQL local et migration Flyway appliquee.
+- Action suivante:
+	- Demarrer B.1.3 (architecture en couches) en reutilisant ce socle de persistence.
 
 
 

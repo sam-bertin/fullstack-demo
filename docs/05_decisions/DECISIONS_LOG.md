@@ -308,3 +308,38 @@ Pipeline un peu plus long qu'un job unique, mais meilleure lisibilite des echecs
 - **Jira :** B.3.2
 - **Documentation associee :** docs/04_devops/B3_2_ci_frontend_workflow.md
 - **PR/Commit (si disponible) :** a renseigner
+
+### Decision 2026-04-15 - B.1.2
+
+#### Contexte
+Le backend ne demarrait pas en local hors tests, faute de datasource configuree. Le projet avait besoin d une strategie de donnees reproductible entre dev/test et compatible avec PostgreSQL cible.
+
+#### Decision retenue
+Mettre en place la strategie suivante:
+- Profils Spring avec `dev` par defaut.
+- Datasource PostgreSQL configuree via variables d environnement (`DB_URL`, `DB_USER`, `DB_PASSWORD`).
+- PostgreSQL local standardise avec `docker-compose.yml`.
+- Migrations SQL versionnees avec Flyway.
+- Test integration Spring Boot execute sur PostgreSQL reel via Testcontainers.
+
+#### Alternatives considerees
+- Conserver H2 pour les tests integration (rejete: ecarts dialecte SQL).
+- Utiliser Liquibase pour cette iteration (rejete: complexite superieure au besoin immediat).
+- Installation PostgreSQL manuelle poste par poste (rejete: faible reproductibilite).
+
+#### Compromis
+Les tests integration sont un peu plus lents car ils lancent un conteneur, mais la fiabilite technique est meilleure et les ecarts dev/prod sont reduits.
+
+#### Impacts
+- **Court terme :** backend demarrable localement avec DB reelle, migration appliquee automatiquement, tests integration plus representatifs.
+- **Long terme :** base solide pour B.1.3 puis Auth/Chat, evolution du schema maitrisable sans SQL ad hoc.
+
+#### Actions de suivi
+- **Action 1 :** implémenter B.1.3 (architecture en couches) sur ce socle.
+- **Action 2 :** creer les entites/repositories metier (C.1.1) en s appuyant sur Flyway.
+- **Action 3 :** ajouter ensuite les Dockerfiles backend/frontend (B.3.x) pour completer la chaine locale->CI.
+
+#### Liens
+- **Jira :** B.1.2
+- **Documentation associee :** docs/02_backend/B1_2_postgresql_profiles_flyway_testcontainers.md
+- **PR/Commit (si disponible) :** a renseigner

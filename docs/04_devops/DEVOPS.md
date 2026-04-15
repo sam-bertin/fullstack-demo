@@ -15,9 +15,9 @@
 - Cache npm frontend gere par `actions/setup-node@v4` avec `cache: 'npm'` et `cache-dependency-path: frontend/package-lock.json`.
 
 ## Docker
-- Dockerfile backend multi-stage.
-- Dockerfile frontend multi-stage + nginx.
-- Orchestration locale (compose).
+- Orchestration locale PostgreSQL implantee via `docker-compose.yml` (B.1.2).
+- Dockerfile backend multi-stage: prevu.
+- Dockerfile frontend multi-stage + nginx: prevu.
 
 ## Workflow Git
 - Branching model.
@@ -54,6 +54,13 @@
 - `.\mvnw.cmd test`
 - `.\mvnw.cmd -DskipTests clean package`
 - Attendu: `LINT_OK`, `TEST_OK`, `PACKAGE_OK`
+
+### Commandes minimales de verification B.1.2 (data strategy)
+- `docker compose up -d postgres`
+- `cd backend/backend`
+- `.\mvnw.cmd test`
+- `.\mvnw.cmd -DskipTests spring-boot:run`
+- Attendu: migration Flyway appliquee, datasource PostgreSQL connectee, backend demarre.
 
 ### Commandes minimales de verification CI frontend
 - `cd frontend`
